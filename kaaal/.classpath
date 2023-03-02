@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="com/fullstackbackend/service/|com/fullstackbackend/config/" kind="src" path="fullstack-backend-master/src/main/java"/>
+	<classpathentry kind="src" path="fullstack-backend-master/src/main/java/com/fullstackbackend/config"/>
+	<classpathentry kind="src" path="fullstack-backend-master/src/main/java/com/fullstackbackend/service"/>
+	<classpathentry kind="src" path="fullstack-backend-master/src/test/java"/>
+	<classpathentry kind="output" path="fullstack-backend-master/target/classes"/>
+</classpath>
