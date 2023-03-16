@@ -32,7 +32,8 @@ body {
     margin-bottom: 15px;
     height: 90px;
     background-color: #b6dbfb;
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 100%;
 }
 

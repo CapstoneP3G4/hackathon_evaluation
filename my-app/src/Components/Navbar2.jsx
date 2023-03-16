@@ -45,7 +45,7 @@ const Navbar2 = () => {
     <nav className="navbar" style={{zIndex: '1'}}>
       <div className="container1">
         <div className="logo">
-          <div ><Link to="/">
+          <div ><Link to="https://www.incedoinc.com/company-overview/">
             <img src="https://www.incedoinc.com/wp-content/uploads/incedo-logo.png" width="101px" />
           </Link></div>
         </div>

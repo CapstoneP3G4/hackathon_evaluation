@@ -64,7 +64,7 @@ export default function PanelistModal({ item, refetch }) {
 
       axios.post("/statusChange", teamObj)
         .then((response) => {
-          Swal.fire(`Participant ${teamObj.status}`);
+          Swal.fire(`Idea ${teamObj.status}`);
           refetch()
         }, (error) => {
           console.log(error);
@@ -125,7 +125,7 @@ export default function PanelistModal({ item, refetch }) {
     setBasicModal(!basicModal);
     axios.post("/statusChange", teamObj)
       .then((response) => {
-        Swal.fire(`Participant ${teamObj.status}`);
+        Swal.fire(`Idea ${teamObj.status}`);
         refetch()
       }, (error) => {
         console.log(error);

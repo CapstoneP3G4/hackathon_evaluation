@@ -47,7 +47,8 @@ function ShowUsers() {
             });
 
     }
-
+    const data = user;
+    console.log(data);
     const panelistRows = user.map((info) => {
         if (info.role_id === 2) {
             return (
