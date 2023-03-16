@@ -78,6 +78,9 @@ function AddJudges() {
     const myStyle = {
         color: 'red'
     }
+    const italicText = {
+        color: "#ccc",
+      };
 
     const handleRole = (e) => {
         const x = e.target.value;
@@ -126,24 +129,24 @@ function AddJudges() {
 
                         <MDBRow className='align-items-center pt-0 '>
                             <MDBCol md='3' >
-                                <MDBInput id="name" value={judges.name} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Name' size='md' type='text' />
+                                <MDBInput id="name" value={judges.name} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label=<span style={italicText}>Name</span> size='md' type='text' />
                                 <p style={myStyle}>{errors.name}</p>
                             </MDBCol>
 
                             <MDBCol md='3'>
-                                <MDBInput id="email" value={judges.email} onChange={(e) => handleInput(e)} wrapperClass='mb-2' label='Email' size='md' type='email' required className='col-md-4' />
+                                <MDBInput id="email" value={judges.email} onChange={(e) => handleInput(e)} wrapperClass='mb-2' label=<span style={italicText}>Email</span> size='md' type='email' required className='col-md-4' />
                                 <p style={myStyle}>{errors.email}</p>
                             </MDBCol>
 
                             <MDBCol md='3'>
-                                <MDBInput id="mobile" type="phone" value={judges.mobile} onChange={(e) => handleInput(e)} label='Phone number' required className='col-md-4' />
+                                <MDBInput id="mobile" type="phone" value={judges.mobile} onChange={(e) => handleInput(e)} label=<span style={italicText}>Phone Number</span> required className='col-md-4' />
                                 <p style={myStyle}>{errors.mobile}</p>
                             </MDBCol>
 
                             {/* /////////  password  ////////////////////////// */}
 
                             <MDBCol md='3' >
-                                <MDBInput id="password" value={judges.password} onChange={(e) => handleInput(e)} label='Password ' type='password' />
+                                <MDBInput id="password" value={judges.password} onChange={(e) => handleInput(e)} label=<span style={italicText}>Password</span> type='password' />
                                 <p style={myStyle}>{errors.password}</p>
                             </MDBCol>
                         </MDBRow>

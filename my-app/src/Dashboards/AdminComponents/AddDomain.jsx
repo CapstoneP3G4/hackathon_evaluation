@@ -66,6 +66,10 @@ function AddDomain() {
 
     }, [load, deleted]);
 
+    const italicText = {
+        color: "#ccc",
+      };
+
 
     const dropdownData = domainData.map((info) => {
         return (
@@ -151,7 +155,7 @@ function AddDomain() {
 
                         <MDBRow className='align-items-center pt-0 '>
                             <MDBCol md='4' >
-                                <MDBInput id="domainName" value={domains.domainName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Domain' size='md' type='text' />
+                                <MDBInput id="domainName" value={domains.domainName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label=<span style={italicText}>Domain</span>  size='md' type='text' />
                                 <p style={myStyle}>{errors.domainName}</p>
                             </MDBCol>
 

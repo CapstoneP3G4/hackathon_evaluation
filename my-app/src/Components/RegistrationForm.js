@@ -476,7 +476,7 @@ function RegistrationForm() {
                       value={teamForm.problemS}
                       onChange={(e) => handleInput(e)}
                       label=<span style={italicText}>
-                        Enter problem statement
+                        Enter problem statement (Max. 500 characters limit)
                       </span>
                       rows={0}
                       style={{ resize: "none" }}
@@ -501,7 +501,7 @@ function RegistrationForm() {
                       value={teamForm.problemD}
                       onChange={(e) => handleInput(e)}
                       label=<span style={italicText}>
-                        Enter problem description and proposed solution
+                        Enter problem description and proposed solution (Max. 5000 characters limit)
                       </span>
                       rows={3}
                       style={{ resize: "none" }}
