@@ -1,5 +1,5 @@
 
-import { MDBRow, MDBCol, MDBCard, MDBCardBody,} from "mdb-react-ui-kit";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, } from "mdb-react-ui-kit";
 import "./Panelist.css";
 import PanelistModal from "./PanelistModal";
 import { useState, useEffect } from "react";
@@ -9,55 +9,55 @@ import moment from "moment";
 import FetchTeamData from "../../hooks/fetch-team-data";
 import Timers from "../../Components/Timers";
 
-const Card = ({ teamObj ,  refetch, isLoading }) => {
-  console.log(teamObj);
+const Card = ({ teamObj, refetch, isLoading }) => {
+  // console.log(teamObj);
 
   const { teamId, teamName, idea } = teamObj;
   return (
     <div className="teamCard">
-      {!isLoading &&teamObj?.newComment && (
-      <MDBCard style={{backgroundColor:"#f2db0d"}}>
-        <MDBCardBody >
-          <MDBRow>
-            <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
-            <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
-            <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
-          </MDBRow>
-          <PanelistModal  item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }}  refetch={refetch} />
-        </MDBCardBody>
-      </MDBCard>
+      {!isLoading && teamObj?.newComment && (
+        <MDBCard style={{ backgroundColor: "#fcf2b3" }}>
+          <MDBCardBody >
+            <MDBRow>
+              <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
+              <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
+              <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
+            </MDBRow>
+            {/* <MDBRow>
+              <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
+            </MDBRow> */}
+            <PanelistModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+          </MDBCardBody>
+        </MDBCard>
       )}
-       {!teamObj?.newComment  && (
+      {!teamObj?.newComment && (
         <MDBCard >
-        <MDBCardBody >
-          <MDBRow>
-            <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
-            <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
-            <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
-          </MDBRow>
-          <PanelistModal
-            item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, } } refetch={refetch}  />
-        </MDBCardBody>
-      </MDBCard>
-       )}
+          <MDBCardBody >
+            <MDBRow>
+              <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
+              <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
+              <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
+            </MDBRow>
+            {/* <MDBRow>
+              <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
+            </MDBRow> */}
+            <PanelistModal
+              item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+          </MDBCardBody>
+        </MDBCard>
+      )}
     </div>
   );
 };
@@ -72,21 +72,9 @@ function Panelist() {
   }, [localStorage.getItem("data")])
 
 
+  const { data, refetch, isLoading } = FetchTeamData();
 
-  // useEffect(() => {
-  //   axios.get("/getTeam").then(
-  //     (response) => {
-  //       setTeam(response.data);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }, [team]);
-
-  const { data, refetch , isLoading} = FetchTeamData();
-
-  useEffect(()=>{
+  useEffect(() => {
     if (data) {
       const filtered = data?.data?.filter((value, index) => {
         if (value?.status === "pending" && (!value?.panelistId || value?.panelistId == panelist.id)) return true;
@@ -96,17 +84,6 @@ function Panelist() {
     }
   }, [data]);
 
-
-  // console.log(team);
-
-
-  // const filtered = team.filter((value, index) => {
-  //   if (value.status === "pending" && (!value?.panelistId || value?.panelistId == panelist.id))
-  //     return true;
-  // });
-
-  // console.log(filtered);
-  
   ////////////////////////////date (only show to penalist before enddate)///////////////////////////////////////////////
 
   const currDate = moment().format("YYYY-MM-DD");
@@ -116,8 +93,6 @@ function Panelist() {
     axios.get('/getEvent')
       .then(response => {
         setEvent(response.data[0]);
-        // console.log(response.data[0]);
-
       }, (error) => {
         console.log(error);
       });
@@ -126,18 +101,18 @@ function Panelist() {
   return (
     <>
       <Navbar />
-        <div className="cards">
+      <div className="cards">
         <MDBRow>
           <MDBCol>
-        <Timers/>
-        </MDBCol>
-        <MDBCol>
-          <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">Panelist Dashboard</h3>
-          <h5 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center" style={{ margin: "-13px" }}>Welcome: {panelist?.name} </h5>
+            <Timers />
+          </MDBCol>
+          <MDBCol>
+            <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">Panelist Dashboard</h3>
+            <h5 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center" style={{ margin: "-13px" }}>Welcome: {panelist?.name} </h5>
           </MDBCol>
           <MDBCol></MDBCol>
-          </MDBRow>
-          {event?.endDate >= currDate && (
+        </MDBRow>
+        {event?.endDate >= currDate && (
           <MDBRow>
             {team.map((value, index) => (
               <MDBCol style={{ marginBottom: "25px" }} md="4" key={index}>
@@ -145,11 +120,11 @@ function Panelist() {
               </MDBCol>
             ))}
           </MDBRow>
-           )}
-        </div>
-     
+        )}
+      </div>
+
       {event?.endDate < currDate && (
-        <h2 style={{color:"red"}}class="text-center">Event ended</h2>
+        <h2 style={{ color: "red" }} class="text-center">Event ended</h2>
       )}
     </>
   );

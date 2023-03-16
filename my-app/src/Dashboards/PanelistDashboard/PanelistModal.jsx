@@ -139,14 +139,8 @@ export default function PanelistModal({ item, refetch }) {
 
   return (
     <>
-      <div
-        className=""
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <MDBBtn onClick={toggleShow}>Review</MDBBtn>
+      <div className="" style={{ display: "flex", justifyContent: "flex-end",}}>
+        <MDBBtn onClick={toggleShow} className="text-center">Review</MDBBtn>
       </div>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
         <MDBModalDialog centered>

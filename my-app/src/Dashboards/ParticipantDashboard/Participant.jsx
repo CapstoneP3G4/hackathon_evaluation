@@ -68,6 +68,9 @@ function Participant() {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter GutHubLink!', });
     }
     else if(!(isValidUrl(git?.gitHubLink))){
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid Link!', });
+    }
+    else if(!(git?.gitHubLink.includes("https://github.com/"))){
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid GutHub Link!', });
     }
     else {
