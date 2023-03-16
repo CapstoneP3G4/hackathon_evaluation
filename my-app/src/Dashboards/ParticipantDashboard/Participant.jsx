@@ -103,38 +103,30 @@ function Participant() {
     }
     //////////////
     else {
+      fetchedData.team.gitHubLink = git.gitHubLink;
       const formData = new FormData();
       formData.append('file', selectedFile);
       formData.append('ideaId', fetchedData?.team?.idea?.ideaId);
 
+      axios.post('/changeGithub', fetchedData.team)
+        .then((response) => {
+          setGit({ ...git, gitHubLink: '' });
+        }, (error) => {
+          console.log(error);
+          // Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!', })
+        });
       setIsLoading(true);
       axios.post('/upload', formData)
         .then((response) => {
-          // console.log(selectedFile);
           setIsLoading(false);
           setSubmit(true);
-          // Swal.fire('Great', 'Video uploaded successfully!', 'success')
+          Swal.fire('Great', 'Files uploaded successfully!', 'success')
         }, (error) => {
           // console.log(error);
           setIsLoading(false);
-          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please upload the video!', })
+          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please upload the Files!', })
         });
 
-      fetchedData.team.gitHubLink = git.gitHubLink;
-      // console.log(git);
-      axios.post('/changeGithub', fetchedData.team)
-        .then((response) => {
-          Swal.fire(
-            'Great',
-            'Your GitHub is submitted successfully!',
-            'success'
-          )
-          setGit({ ...git, gitHubLink: '' });
-
-        }, (error) => {
-          console.log(error);
-          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!', })
-        });
     }
     return false;
   };
@@ -165,43 +157,49 @@ function Participant() {
             {/* team details*/}
             {Object.keys(data).length > 0 && (<> <TeamDetails userObj={data} />
 
-
-
-
               {/* ////////////////////////////file upload form////////// */}
               {event?.endDate >= currDate && (
                 <>
-                  <MDBRow>
-                    {!fetchedData?.team?.gitHubLink && (
-                      <MDBCol style={{ marginTop: "35px" }}>
-                        <div className="ml-5 pb-2">
-                          <MDBInput label="Github repository link" id="gitHubLink" value={git.gitHubLink} onChange={(e) => handleInput(e)} type="url" />
-                          <br />
-                          <MDBBtn onClick={handleSubmit}>Submit</MDBBtn>
-                        </div>
-                      </MDBCol>
-                    )}
-                    &nbsp;
-                    {!fetchedData?.team?.idea?.demo && (
-                      <MDBCol>
-                        {/* <FileUpload userObj={fetchedData?.team?.idea} /> */}
-                        {submit == false && (
-                          <>
-                            <MDBFile label="Upload the presentation video in '.mp4' format only" onChange={handleFileInput} />
+                  {!fetchedData?.team?.gitHubLink && (
+                    <MDBRow>
+                      {!fetchedData?.team?.gitHubLink && (
+                        <MDBCol style={{ marginTop: "35px" }}>
+                          <div className="ml-5 pb-2">
+                            <MDBInput label="Github repository link" id="gitHubLink" value={git.gitHubLink} onChange={(e) => handleInput(e)} type="url" />
                             <br />
-                            {/* <MDBBtn onClick={handleSubmit} >Upload</MDBBtn> */}
-                            &nbsp;&nbsp;&nbsp;
-                            {isLoading && (
-                              <MDBSpinner color='dark' style={{ marginTop: "5px" }} className="justify-content-center">
-                                <span className='visually-hidden'>Loading...</span>
-                              </MDBSpinner>
-                            )}
-                          </>
+                            <MDBBtn onClick={handleSubmit}>Submit</MDBBtn>
+                          </div>
+                        </MDBCol>
+                      )}
+                      &nbsp;
+                      {!fetchedData?.team?.idea?.demo && (
+                        <MDBCol>
+                          {/* <FileUpload userObj={fetchedData?.team?.idea} /> */}
+                          {submit == false && (
+                            <>
+                              <MDBFile label="Upload the presentation video in '.mp4' format only" onChange={handleFileInput} />
+                              <br />
+                              {/* <MDBBtn onClick={handleSubmit} >Upload</MDBBtn> */}
+                              &nbsp;&nbsp;&nbsp;
+                              {/* {isLoading && (
+                                <MDBSpinner color='dark' style={{ marginTop: "5px" }} className="justify-content-center">
+                                  <span className='visually-hidden'>Loading...</span>
+                                </MDBSpinner>
+                              )} */}
+                            </>
 
-                        )}
-                      </MDBCol>
+                          )}
+                        </MDBCol>
+                      )}
+                    </MDBRow>
+                  )}
+                  <div style={{display:"flex", justifyContent:"center"}}>
+                    {isLoading && (
+                      <MDBSpinner color='dark' style={{ marginTop: "5px" }} >
+                        <span className='visually-hidden'>Loading...</span>
+                      </MDBSpinner>
                     )}
-                  </MDBRow>
+                  </div>
 
                   <MDBRow>
                     {fetchedData?.team?.gitHubLink && fetchedData?.team?.idea?.demo && (
