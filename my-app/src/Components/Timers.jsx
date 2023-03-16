@@ -28,10 +28,10 @@ const Timers = ({ endDate }) => {
 
         if (difference > 0) {
             timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                min: Math.floor((difference / 1000 / 60) % 60),
-                sec: Math.floor((difference / 1000) % 60)
+                "D :": Math.floor(difference / (1000 * 60 * 60 * 24)),
+                "H :": Math.floor((difference / (1000 * 60 * 60)) % 24),
+                "M :": Math.floor((difference / 1000 / 60) % 60),
+                "S ": Math.floor((difference / 1000) % 60)
             };
         }
         return timeLeft;
