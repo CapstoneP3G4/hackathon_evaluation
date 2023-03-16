@@ -59,8 +59,6 @@ function FileUpload({ userObj }) {
     <>
       {submit == false && (
         <>
-
-
           <MDBFile label="Upload the presentation video in '.mp4' format only" onChange={handleFileInput} />
           <br />
           <MDBBtn onClick={handleSubmit} >Upload</MDBBtn>

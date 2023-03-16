@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import { MDBContainer, MDBInput, MDBBtn, MDBCol, MDBRow } from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
+import { MDBContainer, MDBInput, MDBBtn, MDBCol, MDBRow, MDBSpinner, MDBFile } from "mdb-react-ui-kit";
 import TeamDetails from "./TeamDetail";
 import FileUpload from "./FileUpload";
 import axios from "axios";
@@ -54,26 +54,72 @@ function Participant() {
     const { id, value } = e.target;
     setGit({ ...git, [id]: value });
   }
-  const isValidUrl = urlString=> {
-    try { 
-      return Boolean(new URL(urlString)); 
+  const isValidUrl = urlString => {
+    try {
+      return Boolean(new URL(urlString));
     }
-    catch(e){ 
-      return false; 
+    catch (e) {
+      return false;
     }
-}
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [submit, setSubmit] = useState(false);
+
+  useEffect(() => {
+    // setSubmit(false);
+  }, [submit])
+
+
+
+  function handleFileInput(e) {
+    setSelectedFile(e.target.files[0]);
+  }
+  // console.log(userObj);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
 
   const handleSubmit = () => {
     if (!git?.gitHubLink) {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter GutHubLink!', });
     }
-    else if(!(isValidUrl(git?.gitHubLink))){
+    else if (!(isValidUrl(git?.gitHubLink))) {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid Link!', });
     }
-    else if(!(git?.gitHubLink.includes("https://github.com/"))){
+    else if (!(git?.gitHubLink.includes("https://github.com/"))) {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid GutHub Link!', });
+    } //////////////////////////
+    else if (!selectedFile) {
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please choose a file!', })
     }
+    else if (selectedFile.type != "video/mp4") {
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'File should be in .mp4 format!', })
+    }
+    //////////////
     else {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('ideaId', fetchedData?.team?.idea?.ideaId);
+
+      setIsLoading(true);
+      axios.post('/upload', formData)
+        .then((response) => {
+          // console.log(selectedFile);
+          setIsLoading(false);
+          setSubmit(true);
+          // Swal.fire('Great', 'Video uploaded successfully!', 'success')
+        }, (error) => {
+          // console.log(error);
+          setIsLoading(false);
+          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please upload the video!', })
+        });
+
       fetchedData.team.gitHubLink = git.gitHubLink;
       // console.log(git);
       axios.post('/changeGithub', fetchedData.team)
@@ -90,6 +136,7 @@ function Participant() {
           Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!', })
         });
     }
+    return false;
   };
 
   ////////////////////////ddate check//////////////////////
@@ -130,14 +177,28 @@ function Participant() {
                         <div className="ml-5 pb-2">
                           <MDBInput label="Github repository link" id="gitHubLink" value={git.gitHubLink} onChange={(e) => handleInput(e)} type="url" />
                           <br />
-                          <MDBBtn onClick={handleSubmit}>Submit Github repository</MDBBtn>
+                          <MDBBtn onClick={handleSubmit}>Submit</MDBBtn>
                         </div>
                       </MDBCol>
                     )}
                     &nbsp;
                     {!fetchedData?.team?.idea?.demo && (
                       <MDBCol>
-                        <FileUpload userObj={fetchedData?.team?.idea} />
+                        {/* <FileUpload userObj={fetchedData?.team?.idea} /> */}
+                        {submit == false && (
+                          <>
+                            <MDBFile label="Upload the presentation video in '.mp4' format only" onChange={handleFileInput} />
+                            <br />
+                            {/* <MDBBtn onClick={handleSubmit} >Upload</MDBBtn> */}
+                            &nbsp;&nbsp;&nbsp;
+                            {isLoading && (
+                              <MDBSpinner color='dark' style={{ marginTop: "5px" }} className="justify-content-center">
+                                <span className='visually-hidden'>Loading...</span>
+                              </MDBSpinner>
+                            )}
+                          </>
+
+                        )}
                       </MDBCol>
                     )}
                   </MDBRow>
@@ -215,8 +276,8 @@ function Participant() {
           <Navbar />
           <MDBContainer fluid>
             {Object.keys(data).length > 0 && (<> <TeamDetails userObj={data} />
-            {event?.endDate < currDate && (<h2 style={{ color: "red" }} className="text-center">Event ended</h2>)}
-              </>)}
+              {event?.endDate < currDate && (<h2 style={{ color: "red" }} className="text-center">Event ended</h2>)}
+            </>)}
           </MDBContainer>
         </>
       );

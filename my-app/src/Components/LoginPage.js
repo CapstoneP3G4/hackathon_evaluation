@@ -83,7 +83,8 @@ function LoginPage() {
           <MDBCol col="10" md="6">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Sample image" />
           </MDBCol>
-          <MDBCol col="4" md="6">
+          <MDBCol col="4" md="5">
+          <h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-6" style={{ paddingBottom: '30px' }}>Hackcedo</h1>
             <MDBInput id="email" value={teamForm.email} onChange={(e) => handleInput(e)} wrapperClass="mb-4" label=<span style={italicText}>Email Address</span> type="email" size="lg" />
             <MDBInput id="password" value={teamForm.password} onChange={(e) => handleInput(e)} wrapperClass="mb-4" label=<span style={italicText}>Password</span> type="password" size="lg" />
             {currDate >= event.startDate && currDate <= event.endDate && (

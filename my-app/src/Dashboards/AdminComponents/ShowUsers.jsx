@@ -1,9 +1,10 @@
-import { MDBCardBody, MDBTable, MDBBtn, MDBRow, MDBCard } from 'mdb-react-ui-kit';
+import { MDBCardBody, MDBTable, MDBBtn, MDBRow, MDBCard, MDBCol } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar2 from '../../Components/Navbar2';
 import { Popconfirm } from 'antd';
 import { style } from '@mui/system';
+import { CSVLink } from 'react-csv';
 
 function ShowUsers() {
 
@@ -47,21 +48,24 @@ function ShowUsers() {
             });
 
     }
-    const data = user;
-    console.log(data);
+
+
+
+    const panelistData = new Array();
     const panelistRows = user.map((info) => {
         if (info.role_id === 2) {
+            panelistData.push(info);
             return (
                 <tr>
                     <td>{info.email}</td>
                     <td>{info.name}</td>
                     <td>
-                            <Popconfirm title="Delete"
-                                description="Are you sure you want to delete the Panelist?"
+                        <Popconfirm title="Delete"
+                            description="Are you sure you want to delete the Panelist?"
 
-                                okText="Confirm" cancelText="Cancel" onConfirm={(e) => handleDelete(info.id)} >
-                                <MDBBtn className='me-1' color='danger' >Delete</MDBBtn>
-                            </Popconfirm>
+                            okText="Confirm" cancelText="Cancel" onConfirm={(e) => handleDelete(info.id)} >
+                            <MDBBtn className='me-1' color='danger' >Delete</MDBBtn>
+                        </Popconfirm>
                     </td>
 
                     {/* <td><MDBBtn onClick={(e) => handleDelete(info.id)} className='me-1' color='danger' >Delete</MDBBtn></td> */}
@@ -69,24 +73,45 @@ function ShowUsers() {
             );
         }
     });
+    // console.log(panelistData);
+    const headers = [
+        { label: 'User ID', key: 'id' },
+        { label: 'Name', key: 'name' },
+        { label: 'Email', key: 'email' },
+        { label: 'Phone Number', key: 'mobile' }
+
+    ];
+
+    const panelistcsvReport = {
+        fileName: 'User_Details.csv', headers: headers, data: panelistData
+    };
+
+    const judgeData = new Array();
     const judgeRows = user.map((info) => {
         if (info.role_id === 3) {
+            judgeData.push(info);
             return (
                 <tr>
                     <td>{info.email}</td>
                     <td>{info.name}</td>
                     <td>
-                            <Popconfirm title="Delete"
-                                description="Are you sure you want to delete the Judge?"
+                        <Popconfirm title="Delete"
+                            description="Are you sure you want to delete the Judge?"
 
-                                okText="Confirm" cancelText="Cancel" onConfirm={(e) => handleDelete(info.id)} >
-                                <MDBBtn className='me-1' color='danger' >Delete</MDBBtn>
-                            </Popconfirm>
+                            okText="Confirm" cancelText="Cancel" onConfirm={(e) => handleDelete(info.id)} >
+                            <MDBBtn className='me-1' color='danger' >Delete</MDBBtn>
+                        </Popconfirm>
                     </td>
                 </tr>
             );
         }
     });
+    // console.log(judgeData);
+    const judgecsvReport = {
+        fileName: 'User_Details.csv', headers: headers, data: judgeData
+    };
+
+    const teamData = team;
     const participentRows = team.map((team) => {
         return (
             <tr>
@@ -97,6 +122,18 @@ function ShowUsers() {
             </tr>
         );
     });
+    console.log(teamData);
+    const teamHeader = [
+        { label: 'Team ID', key: 'teamId' },
+        { label: 'Team Name', key: 'teamName' },
+        { label: 'Status', key: 'status' },
+        { label: 'Marks', key: 'marks' },
+        { label: 'Assigned Panelist ID', key: 'panelistId' }
+
+    ];
+    const teamcsvReport = {
+        fileName: 'User_Details.csv', headers: teamHeader, data: teamData
+    };
 
     return (
         <>
@@ -104,13 +141,22 @@ function ShowUsers() {
             <MDBRow className='justify-content-center align-items-center m-5'>
                 <MDBCard>
                     <MDBCardBody className='px-8'>
-                        <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2 ">Panelist table</h4>
+                        <MDBRow>
+                            <MDBCol>
+                                <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2 ">Panelist table</h4>
+                            </MDBCol>
+                            <MDBCol  style={{   display: "flex", justifyContent: "right"}}>
+                                <CSVLink {...panelistcsvReport}>
+                                    Export to CSV
+                                </CSVLink>
+                            </MDBCol>
+                        </MDBRow>
                         <MDBTable bordered borderColor="primary" className="text-break">
                             <thead>
                                 <tr>
-                                    <th style={{width:"33%"}}>Email</th>
-                                    <th style={{width:"33%"}}>Name</th>
-                                    <th style={{width:"33%"}}>Action</th>
+                                    <th style={{ width: "33%" }}>Email</th>
+                                    <th style={{ width: "33%" }}>Name</th>
+                                    <th style={{ width: "33%" }}>Action</th>
                                 </tr>
                             </thead>
                             <tbody>{panelistRows}</tbody>
@@ -124,13 +170,22 @@ function ShowUsers() {
             <MDBRow className='justify-content-center align-items-center m-5'>
                 <MDBCard>
                     <MDBCardBody className='px-8'>
-                        <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Judge table</h4>
+                        <MDBRow>
+                            <MDBCol>
+                                <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Judge table</h4>
+                            </MDBCol>
+                            <MDBCol style={{   display: "flex", justifyContent: "right"}}>
+                                <CSVLink {...judgecsvReport}>
+                                    Export to CSV
+                                </CSVLink>
+                            </MDBCol>
+                        </MDBRow>
                         <MDBTable bordered borderColor="primary" className="text-break">
                             <thead>
                                 <tr>
-                                    <th style={{width:"33%"}}>Email</th>
-                                    <th style={{width:"33%"}}>Name</th>
-                                    <th style={{width:"33%"}}>Action</th>
+                                    <th style={{ width: "33%" }}>Email</th>
+                                    <th style={{ width: "33%" }}>Name</th>
+                                    <th style={{ width: "33%" }}>Action</th>
                                 </tr>
                             </thead>
                             <tbody>{judgeRows}</tbody>
@@ -144,15 +199,24 @@ function ShowUsers() {
             <MDBRow className='justify-content-center align-items-center m-5'>
                 <MDBCard>
                     <MDBCardBody className='px-8'>
-                        <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Team table</h4>
+                        <MDBRow>
+                            <MDBCol>
+                            <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Team table</h4>
+                            </MDBCol>
+                            <MDBCol  style={{   display: "flex", justifyContent: "right"}}>
+                                <CSVLink {...teamcsvReport}>
+                                    Export to CSV
+                                </CSVLink>
+                            </MDBCol>
+                        </MDBRow>
                         <MDBTable bordered borderColor="primary" className="text-break">
                             {/* <table className="table table-stripped"> */}
                             <thead>
                                 <tr>
-                                    <th style={{width:"10%"}}>Id</th>
-                                    <th style={{width:"30%"}}>Name</th>
-                                    <th style={{width:"30%"}}>Status</th>
-                                    <th style={{width:"30%"}}>Marks</th>
+                                    <th style={{ width: "10%" }}>Id</th>
+                                    <th style={{ width: "30%" }}>Name</th>
+                                    <th style={{ width: "30%" }}>Status</th>
+                                    <th style={{ width: "30%" }}>Marks</th>
                                 </tr>
                             </thead>
                             <tbody>{participentRows}</tbody>
