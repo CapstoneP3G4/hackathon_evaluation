@@ -8,7 +8,7 @@ import {
   MDBModalContent,
   MDBModalHeader,
   MDBModalTitle,
-  MDBModalBody, MDBModalFooter,
+  MDBModalBody, MDBModalFooter, MDBCol,
 } from "mdb-react-ui-kit";
 
 export default function PanelistModal({ item, refetch }) {
@@ -139,7 +139,7 @@ export default function PanelistModal({ item, refetch }) {
 
   return (
     <>
-      <div className="" style={{ display: "flex", justifyContent: "flex-end",}}>
+      <div className="" style={{ display: "flex", justifyContent: "",}}>
         <MDBBtn onClick={toggleShow} className="text-center">Review</MDBBtn>
       </div>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">

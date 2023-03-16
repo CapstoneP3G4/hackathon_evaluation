@@ -19,20 +19,33 @@ const Card = ({ teamObj, refetch, isLoading }) => {
         <MDBCard style={{ backgroundColor: "#fcf2b3" }}>
           <MDBCardBody >
             <MDBRow>
-              <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
-              <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
-              <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
-            </MDBRow>
-            {/* <MDBRow>
+              <MDBCol md="6">
+                <MDBRow>
+                  <h6 className="fw-bold">Team ID</h6>
+                </MDBRow>
+                <MDBRow>
+                  <h4 className="fw-bold">{teamId}</h4>
+                </MDBRow>
+              </MDBCol>
+              <MDBCol md="6">
+                <MDBRow>
+                  <h6 className="fw-bold">Team Name</h6>
+                </MDBRow>
+                <MDBRow>
+                  <h4 className="fw-bold">{teamName}</h4>
+                </MDBRow>
+              </MDBCol>
+
+              {/* <MDBRow>
               <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
             </MDBRow>
             <MDBRow>
               <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
             </MDBRow> */}
-            <PanelistModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+            </MDBRow>
+            <MDBRow>
+              <PanelistModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+            </MDBRow>
           </MDBCardBody>
         </MDBCard>
       )}
@@ -40,21 +53,35 @@ const Card = ({ teamObj, refetch, isLoading }) => {
         <MDBCard >
           <MDBCardBody >
             <MDBRow>
-              <MDBCol md="6"><h6 className="fw-bold">Team ID</h6></MDBCol>
-              <MDBCol md="6"><h6 className="fw-bold">Team Name</h6></MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="6"><h4 className="fw-bold">{teamId}</h4></MDBCol>
-              <MDBCol md="6"><h4 className="fw-bold">{teamName}</h4></MDBCol>
-            </MDBRow>
-            {/* <MDBRow>
+              <MDBCol md="6">
+                <MDBRow>
+                  <h6 className="fw-bold">Team ID</h6>
+                </MDBRow>
+                <MDBRow>
+                  <h4 className="fw-bold">{teamId}</h4>
+                </MDBRow>
+              </MDBCol>
+              <MDBCol md="6">
+                <MDBRow>
+                  <h6 className="fw-bold">Team Name</h6>
+                </MDBRow>
+                <MDBRow>
+                  <h4 className="fw-bold">{teamName}</h4>
+                </MDBRow>
+              </MDBCol>
+
+              
+              {/* <MDBRow>
               <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
             </MDBRow>
             <MDBRow>
               <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
             </MDBRow> */}
-            <PanelistModal
-              item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+            </MDBRow>
+            <MDBRow>
+              <PanelistModal
+                item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
+            </MDBRow>
           </MDBCardBody>
         </MDBCard>
       )}
