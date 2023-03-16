@@ -36,7 +36,7 @@ function Admin() {
         e.preventDefault();
         axios.post("/winnersMail").then(
             (response) => {
-                Swal.fire('Great', 'Mail sends successfully!', 'success');
+                Swal.fire('Great', 'Mail sent successfully!', 'success');
             },
             (error) => {
               console.log(error);
