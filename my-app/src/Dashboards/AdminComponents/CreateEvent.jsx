@@ -58,6 +58,8 @@ function CreateEvent() {
         setEvent({ ...event, [id]: value });
     }
 
+    ////////////////validations check for event////////////////////////////
+
     const validate = (event) => {
         const errorsObj = {};
 
@@ -80,6 +82,9 @@ function CreateEvent() {
     const myStyle = {
         color: 'red'
     }
+      const italicText = {
+    color: "#ccc",
+  };
     return (
         <>
             <MDBRow className='justify-content-center align-items-center m-5'>
@@ -131,7 +136,7 @@ function CreateEvent() {
                                 </MDBCol>
 
                                 <MDBCol md='9' className='pe-5'>
-                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label='' rows={3} style={{ resize: "none" }} required className='col-md-4' />
+                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label='Max. 5000 characters limit' rows={3} style={{ resize: "none" }} required className='col-md-4' />
                                     <p style={myStyle}>{errors.description}</p>
                                 </MDBCol>
 

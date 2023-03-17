@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import axios from "axios";
 
 
-
+///////////////////////card of upcoming event////////////////////////
 const Card = ({ description, endDate, eventId, eventName, startDate, }) => {
 
   return (
@@ -40,54 +40,37 @@ const Card = ({ description, endDate, eventId, eventName, startDate, }) => {
 
 export default function App() {
   const slider = useRef(null);
-
   const [event, setEvent] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get("/getEvent").then(
-  //     (response) => {
-  //       // console.log(response.data);
-  //       setEvent(response.data);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-
-  // }, []);
-
+  ///////////////////////display according to screen size////////////////////////////
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 600) {
-        setSettings((prevSettings) => ({
-          ...prevSettings,
-          slidesToShow: 1,
-        }));
-      } 
-      else if (window.innerWidth < 768) {
-        setSettings((prevSettings) => ({
-          ...prevSettings,
-          slidesToShow: (event?.length < 2) ? event?.length : 2,
-        }));
-      }else {
-        setSettings((prevSettings) => ({
-          ...prevSettings,
-          slidesToShow: (event?.length < 3) ? event?.length : 3,
-        }));
-      }
+    if (window.innerWidth < 600) {
+      setSettings((prevSettings) => ({
+        ...prevSettings,
+        slidesToShow: 1,
+      }));
     }
-    window.addEventListener("resize", handleResize);
-    axios.get("/getEvent").then(
-      (response) => {
-        setEvent(response.data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    else if (window.innerWidth < 768) {
+      setSettings((prevSettings) => ({
+        ...prevSettings,
+        slidesToShow: (event?.length < 2) ? event?.length : 2,
+      }));
+    } else {
+      setSettings((prevSettings) => ({
+        ...prevSettings,
+        slidesToShow: (event?.length < 3) ? event?.length : 3,
+      }));
+    }
+      axios.get("/getEvent").then(
+        (response) => {
+          setEvent(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-  }, [event]);
-  // const settings = { centerMode: true, draggable: true, centerPadding: "20px", pauseOnHover: true, infinite: true, swipeToSlide: true, slidesToShow: (event?.length < 3) ? event?.length : 3, slidesToScroll: 1, autoplay: true, speed: 1000, autoplaySpeed: 2000, focusOnSelect: true, };
+    }, [event]);
 
   const [settings, setSettings] = useState({
     centerMode: true,
@@ -96,7 +79,7 @@ export default function App() {
     pauseOnHover: true,
     infinite: true,
     swipeToSlide: true,
-    slidesToShow: (event?.length < 3) ? event?.length : 3,
+    slidesToShow: (event?.length >= 3) ? 3 : event?.length,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
@@ -108,7 +91,7 @@ export default function App() {
   return (
     <>
       {event?.length > 0 && (
-        <div id="eventList" className="bg-color" style={{ marginTop: '70px' }}>
+        <div id="eventList" className="bg-color" style={{ marginTop: '70px'}} >
           <h2 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-5 text-center" >Hack-a-thon Events</h2>
           <Slider {...settings} ref={slider}>
             {event.map((card, i) => (

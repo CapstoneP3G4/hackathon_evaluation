@@ -26,7 +26,7 @@ function ChangePassword() {
     email: '',
     oldPassword: '',
     newPassword: '',
-    confirmPassword: '',
+    confirmPassword:'',
   });
 
   const handlePass = (e) => {
@@ -45,11 +45,9 @@ function ChangePassword() {
     setSubmit(true);
   }
 
+  ///////////////////////post api//////////////////////////
   useEffect(() => {
-    console.log(errors);
     if (Object.keys(errors).length === 0 && isSubmit) {
-      console.log(teamForm);
-
       axios.post('/ChangePassword', teamForm)
         .then((response) => {
           console.log(response);
@@ -72,6 +70,7 @@ function ChangePassword() {
     }
   }, [errors]);
 
+  /////////////////////validations//////////////////////
   const validate = (teamForm) => {
 
     const errorsObj = {};

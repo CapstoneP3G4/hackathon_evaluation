@@ -11,7 +11,6 @@ const Footer = () => {
   const styles = {
     background: "rgb(255,170,79)",
     background: "linear-gradient(165deg, rgba(255,255,255,1) 0%, rgba(96,180,255,1) 100%)",
-    // background: "linear-gradient(283deg, rgba(255,170,79,1) 0%, rgba(185,201,255,1) 100%)",
   };
   return (
     <div style={styles}>
@@ -52,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div /*class="elementor-column elementor-col-50 elementor-inner-column elementor-element"*/ style={{
+        <div style={{
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "flex-end",

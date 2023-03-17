@@ -19,6 +19,8 @@ function RegistrationForm() {
   const [domain, setDomain] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  //////////////Get domain////////////////////////
+
   useEffect(() => {
     axios.get("/getDomain").then(
       (response) => {
@@ -38,6 +40,8 @@ function RegistrationForm() {
   const handleSelect = (event) => {
     setSelectedOption(event.target.value);
   };
+
+  //////////////set Team Form //////////////////
 
   const [teamForm, setTeamForm] = useState({
     team: "",
@@ -74,14 +78,12 @@ function RegistrationForm() {
   };
 
   const handleclick = (e) => {
-    // console.log(teamForm);
-
     e.preventDefault();
     serErrors(validate(teamForm));
     setSubmit(true);
   };
 
-  //////////////////connect to server/////////////////////////////////////
+  //////////////////connect to server///////////////////////////
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmit) {
       setIsLoading(true);
@@ -99,6 +101,8 @@ function RegistrationForm() {
         );
     }
   }, [errors]);
+
+  /////////////////validation checks///////////////////////
 
   const validate = (teamForm) => {
     const errorsObj = {};
@@ -472,7 +476,7 @@ function RegistrationForm() {
                       value={teamForm.problemS}
                       onChange={(e) => handleInput(e)}
                       label=<span style={italicText}>
-                        Enter problem statement
+                        Enter problem statement (Max. 500 characters limit)
                       </span>
                       rows={0}
                       style={{ resize: "none" }}
@@ -497,7 +501,7 @@ function RegistrationForm() {
                       value={teamForm.problemD}
                       onChange={(e) => handleInput(e)}
                       label=<span style={italicText}>
-                        Enter problem description and proposed solution
+                        Enter problem description and proposed solution (Max. 5000 characters limit)
                       </span>
                       rows={3}
                       style={{ resize: "none" }}

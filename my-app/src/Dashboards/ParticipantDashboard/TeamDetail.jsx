@@ -29,16 +29,16 @@ const Card1 = ({ teamObj }) => {
       </MDBCardBody>
       {/* <MDBCardFooter> */}
       {team?.status == "reverted" && (
-        <MDBBtn href='#' color='warning' disabled>Status: {team?.status}</MDBBtn>
+        <MDBBtn href='#' color='warning' disabled>Idea Status: {team?.status}</MDBBtn>
       )}
       {team?.status == "accepted" && (
-        <MDBBtn href='#' color='success' disabled>Status: {team?.status}</MDBBtn>
+        <MDBBtn href='#' color='success' disabled>Idea Status: {team?.status}</MDBBtn>
       )}
       {team?.status == "rejected" && (
-        <MDBBtn href='#' color='danger' disabled>Status: {team?.status}</MDBBtn>
+        <MDBBtn href='#' color='danger' disabled>Idea Status: {team?.status}</MDBBtn>
       )}
       {team?.status == "pending" && (
-        <MDBBtn href='#' color='info' disabled>Status: {team?.status}</MDBBtn>
+        <MDBBtn href='#' color='info' disabled>Idea Status: {team?.status}</MDBBtn>
       )}
 
       {/* </MDBCardFooter> */}
@@ -67,7 +67,7 @@ function TeamDetails({ userObj }) {
   const [Submit, setSubmit] = useState(false);
 
   useState(() => {
-    console.log("Form submitted");
+    // console.log("Form submitted");
     setSubmit(false);
   }, [Submit]);
 

@@ -8,7 +8,7 @@ import {
   MDBModalContent,
   MDBModalHeader,
   MDBModalTitle,
-  MDBModalBody, MDBModalFooter,
+  MDBModalBody, MDBModalFooter, MDBCol,
 } from "mdb-react-ui-kit";
 
 export default function PanelistModal({ item, refetch }) {
@@ -64,7 +64,7 @@ export default function PanelistModal({ item, refetch }) {
 
       axios.post("/statusChange", teamObj)
         .then((response) => {
-          Swal.fire(`Participant ${teamObj.status}`);
+          Swal.fire(`Idea ${teamObj.status}`);
           refetch()
         }, (error) => {
           console.log(error);
@@ -80,6 +80,39 @@ export default function PanelistModal({ item, refetch }) {
   };
 
 
+  // const handleCommentSubmit = async () => {
+  //   if (!commentText) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Oops...',
+  //       text: 'Comment cannot be empty',
+  //     });
+  //   }
+  //   else {
+  //     teamObj.newComment = commentText;
+  //     teamObj.status = "reverted";
+  //     teamObj.panelistId = data.id;
+  //     // console.log(teamObj);
+
+  //     setBasicModal(!basicModal);
+  //     try {
+  //       axios.post("/statusChange", teamObj)
+  //       await Swal.fire(`Participant ${teamObj.status}`);
+  //       await refetch()
+  //     } catch (err) {
+  //       console.log(err);
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Oops...',
+  //         text: 'An error has occured',
+  //       });
+  //     }
+  //     setCommentText('');
+  //     setShowCommentBox(false);
+     
+  //   }
+  // };
+
 
   //////////////////////////////////////////////////////////////
 
@@ -92,7 +125,7 @@ export default function PanelistModal({ item, refetch }) {
     setBasicModal(!basicModal);
     axios.post("/statusChange", teamObj)
       .then((response) => {
-        Swal.fire(`Participant ${teamObj.status}`);
+        Swal.fire(`Idea ${teamObj.status}`);
         refetch()
       }, (error) => {
         console.log(error);
@@ -106,14 +139,8 @@ export default function PanelistModal({ item, refetch }) {
 
   return (
     <>
-      <div
-        className=""
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <MDBBtn onClick={toggleShow}>Review</MDBBtn>
+      <div className="" style={{ display: "flex", justifyContent: "",}}>
+        <MDBBtn onClick={toggleShow} className="text-center">Review</MDBBtn>
       </div>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
         <MDBModalDialog centered>
