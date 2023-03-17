@@ -1,4 +1,4 @@
-import { MDBContainer, MDBBtn } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBBtn ,MDBSpinner} from 'mdb-react-ui-kit';
 // import 'react-datepicker/dist/react-datepicker.css';
 import AddJudges from './AddJudges';
 import CreateEvent from './CreateEvent';
@@ -16,89 +16,102 @@ import Swal from 'sweetalert2';
 
 function Admin() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    //////////////////show user button////////////////////////
+  //////////////////show user button////////////////////////
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate("/showUsers");
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/showUsers");
+  }
 
-    /////////////////update event/////////////////////////////
-    const handleEvent = (e) => {
-        e.preventDefault();
-        navigate("/updateEvent");
-    }
+  /////////////////update event/////////////////////////////
+  const handleEvent = (e) => {
+    e.preventDefault();
+    navigate("/updateEvent");
+  }
 
-    ////////////////////handle mail for winners/////////////////
-    const handleMail = (e) => {
-        e.preventDefault();
-        axios.post("/winnersMail").then(
-            (response) => {
-                Swal.fire('Great', 'Mail sent successfully!', 'success');
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-    }
+  ////////////////////handle mail for winners/////////////////
+  const [isLoading, setIsLoading] = useState(false);
+  const handleMail = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    event.result = "true";
+    // console.log(event);
+    axios.post("/winnersMail", event).then(
+      (response) => {
+        setIsLoading(false);
+        Swal.fire('Great', 'Mail sent successfully!', 'success');
+      },
+      (error) => {
+        setIsLoading(false);
+        console.log(error);
+      }
+    );
+  }
 
-    //////////////////////api call for get the event/////////////////////
-    
-    const [event, setEvent] = useState({});
-    useEffect(() => {
-        axios.get("/getEvent").then(
-          (response) => {
-            setEvent(response.data[0]);
-            // console.log(response.data[0]);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    
-      }, []);
-      const currDate = moment().format("YYYY-MM-DD");
+  //////////////////////api call for get the event/////////////////////
 
-    return (
-        <>
-            <Navbar />
+  const [event, setEvent] = useState({});
+  useEffect(() => {
+    axios.get("/getEvent").then(
+      (response) => {
+        setEvent(response.data[0]);
+        // console.log(response.data[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
-            <MDBContainer fluid>
-                {/* //////////////////////add judges/////////////////// */}
-                <AddJudges />
+  }, []);
+  const currDate = moment().format("YYYY-MM-DD");
 
+  return (
+    <>
+      <Navbar />
 
-                  {/* ////////////////show alll //////////////////////////*/}
-                <div className="col text-center">
-                    <MDBBtn onClick={handleSubmit} className="btn btn-default" style={{ width: "25%" }}> Show Users</MDBBtn>
-                </div>
-
-
-                {/* ///////////////////create event///////////////////////////// */}
-
-                <CreateEvent />
-
-                {/* /////////////////////Edit event ////////////////////////////////////////////////// */}
-                <div className="col text-center">
-                    <MDBBtn onClick={handleEvent} className="btn btn-default" style={{ width: "25%" }}> Update Event</MDBBtn>
-                </div>
+      <MDBContainer fluid>
+        {/* //////////////////////add judges/////////////////// */}
+        <AddJudges />
 
 
-                {/* /////////////////////////////add domain ///////////////////*/}
+        {/* ////////////////show alll //////////////////////////*/}
+        <div className="col text-center">
+          <MDBBtn onClick={handleSubmit} className="btn btn-default" style={{ width: "25%" }}> Show Users</MDBBtn>
+        </div>
 
-                <AddDomain />
 
-                {/* /////////////////////////////send mail to winners///////////////////////////////////// */}
-                {event.endDate <currDate && (
-                <div className="col text-center">
-                    <MDBBtn onClick={handleMail} className="btn btn-default" style={{ width: "25%",marginBottom:"5%" }}> Send mail to winners</MDBBtn>
-                </div>
-                )}
+        {/* ///////////////////create event///////////////////////////// */}
 
-            </MDBContainer>
-        </>
-    )
+        <CreateEvent />
+
+        {/* /////////////////////Edit event ////////////////////////////////////////////////// */}
+        <div className="col text-center">
+          <MDBBtn onClick={handleEvent} className="btn btn-default" style={{ width: "25%" }}> Update Event</MDBBtn>
+        </div>
+
+
+        {/* /////////////////////////////add domain ///////////////////*/}
+
+        <AddDomain />
+
+        {/* /////////////////////////////send mail to winners///////////////////////////////////// */}
+        {event.endDate < currDate && (
+          <div className="col text-center">
+            <MDBBtn onClick={handleMail} className="btn btn-default" style={{ width: "25%", marginBottom: "5%" }}> Send mail to winners</MDBBtn>
+          </div>
+        )}
+        <div style={{display:"flex", justifyContent:"center"}}>
+        {isLoading && (
+          <MDBSpinner color='dark' style={{ marginTop: "-4%" , marginBottom:"2%"}} className="justify-content-center">
+            <span className='visually-hidden'>Loading...</span>
+          </MDBSpinner>
+        )}
+        </div>
+
+      </MDBContainer>
+    </>
+  )
 }
 export default Admin;
