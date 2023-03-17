@@ -68,6 +68,20 @@ const Navbar = () => {
       });
   }, []);
 
+  const [event, setEvent] = useState({});
+  useEffect(() => {
+    axios.get("/getEvent").then(
+      (response) => {
+        setEvent(response.data[0]);
+        // console.log(response.data[0]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }, []);
+
   return (
     // <div style={{marginBottom:"5px",paddingLeft:"50px", backgroundColor:"#d4e4ff"}} className="flex justify-between items-center h-24  mx-auto px-12 text-black-300">
     // <div><Link to="/">
@@ -95,7 +109,7 @@ const Navbar = () => {
             <li>
               <NavLink onClick={handleClickScrollEvents}>Events</NavLink>
             </li>
-            {winners[0]?.marks > 0 && (
+            {winners[0]?.marks > 0 && event?.result=="true" && (
             <li>
               <NavLink onClick={handleClickScrollTopScorers}>Top Scorers</NavLink>
             </li>
