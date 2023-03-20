@@ -90,8 +90,8 @@ function Judge() {
 
   let date = new Date(event[0]?.endDate);
 
-  // add 5 days
-  date.setDate(date.getDate() + 3);
+  // add 2 days
+  date.setDate(date.getDate() + 2);
 
   const evaluationDate = moment(date).format("YYYY-MM-DD");
 
@@ -106,15 +106,24 @@ function Judge() {
   return (
     <>
       <Navbar />
-      {/* {event[0]?.endDate < currDate && (
-      <Timers endDate={evaluationDate}/>
-      )} */}
       <div className="cards">
+      <MDBRow>
+        <MDBCol>
+          {event[0]?.endDate < currDate && (
+            <Timers endDate={evaluationDate} />
+          )}
+        </MDBCol>
+        <MDBCol>
+          
 
-        <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">Judge Dashboard</h3>
-        <h5 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center" style={{ margin: "-13px" }}>Welcome: {judgeData?.name} </h5>
+            <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">Judge Dashboard</h3>
+            <h5 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center" style={{ margin: "-13px" }}>Welcome: {judgeData?.name} </h5>
+        </MDBCol>
+        <MDBCol></MDBCol>
+      </MDBRow>
 
-        {event[0]?.endDate < currDate && (
+      <MDBRow>
+      {event[0]?.endDate < currDate && currDate<= evaluationDate &&(
         <MDBRow>
           {team.map((value, index) => (
             <>
@@ -125,10 +134,12 @@ function Judge() {
             </>
           ))}
         </MDBRow>
-        )}
-        {event[0]?.endDate >= currDate && (
-          <h2 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center " >Evaluation period will start after {event[0]?.endDate}</h2>
-        )}
+        
+      )}
+      {event[0]?.endDate >= currDate && (
+        <h2 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center " >Evaluation period will start after {event[0]?.endDate}</h2>
+      )}
+      </MDBRow>
       </div>
     </>);
 }

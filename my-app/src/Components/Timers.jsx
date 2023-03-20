@@ -21,9 +21,9 @@ const Timers = ({ endDate }) => {
     /////////////////////remaining time left ///////////////////
     const calculateTimeLeft = () => {
         let difference = +new Date(event?.endDate) - +new Date() - 19800000 + 86400000;
-        // if(endDate){
-        //     difference = +new Date(endDate) - +new Date()  - 19800000 + 86400000;
-        // }
+        if(endDate){
+            difference = +new Date(endDate) - +new Date()  - 19800000 + 86400000;
+        }
         let timeLeft = {};
 
         if (difference > 0) {
