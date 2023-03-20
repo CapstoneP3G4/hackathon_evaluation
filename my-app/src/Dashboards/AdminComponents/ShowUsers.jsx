@@ -119,10 +119,11 @@ function ShowUsers() {
                 <td>{team.teamName}</td>
                 <td>{team.status}</td>
                 <td>{team.marks}</td>
+                {!team?.idea?.demo && (<td>No</td>)}
+                {team?.idea?.demo && (<td>Yes</td>)}
             </tr>
         );
     });
-    console.log(teamData);
     const teamHeader = [
         { label: 'Team ID', key: 'teamId' },
         { label: 'Team Name', key: 'teamName' },
@@ -215,8 +216,9 @@ function ShowUsers() {
                                 <tr>
                                     <th style={{ width: "10%" }}>Id</th>
                                     <th style={{ width: "30%" }}>Name</th>
-                                    <th style={{ width: "30%" }}>Status</th>
-                                    <th style={{ width: "30%" }}>Marks</th>
+                                    <th style={{ width: "20%" }}>Status</th>
+                                    <th style={{ width: "20%" }}>Marks</th>
+                                    <th style={{ width: "20%" }}>Demo Submitted</th>
                                 </tr>
                             </thead>
                             <tbody>{participentRows}</tbody>
