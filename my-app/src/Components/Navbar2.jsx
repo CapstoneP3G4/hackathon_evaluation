@@ -42,7 +42,7 @@ const Navbar2 = () => {
     // </div>
 
 
-    <nav className="navbar" style={{zIndex: '1'}}>
+    <nav className="navbar" style={{ zIndex: '1' }}>
       <div className="container1">
         <div className="logo">
           <div ><Link to="https://www.incedoinc.com/company-overview/">
@@ -54,20 +54,24 @@ const Navbar2 = () => {
         </div>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
-            {/* <li>
-              <NavLink to="/">Home</NavLink>
-            </li> */}
+            <li>
+              <NavLink to="/">
+                <img src="https://cdn-icons-png.flaticon.com/512/5974/5974636.png" width="31px" />
+              </NavLink>
+            </li>
             <li>
               <Link to="/ChangePassword"><Button variant="outlined" color='error'>Update Password</Button></Link>
             </li>
             <li>
               <Button onClick={handleclick} variant="contained" color='error'>{window.status}</Button>
             </li>
+
           </ul>
         </div>
       </div>
     </nav>
   );
 };
+//C:\Users\user8\Downloads\5974636
 
 export default Navbar2;
