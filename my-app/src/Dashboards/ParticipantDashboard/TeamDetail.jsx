@@ -123,9 +123,7 @@ function TeamDetails({ userObj }) {
 
       <div className="cards">
         <MDBRow>
-          <MDBCol>
-        <Timers />
-        </MDBCol>
+          <MDBCol><Timers /></MDBCol>
         <MDBCol>
         <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">
           Participant Details

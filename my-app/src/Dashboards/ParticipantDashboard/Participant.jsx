@@ -193,7 +193,7 @@ function Participant() {
                       )}
                     </MDBRow>
                   )}
-                  <div style={{display:"flex", justifyContent:"center"}}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     {isLoading && (
                       <MDBSpinner color='dark' style={{ marginTop: "5px" }} >
                         <span className='visually-hidden'>Loading...</span>
@@ -226,11 +226,36 @@ function Participant() {
             {Object.keys(data).length > 0 && (<> <TeamDetails userObj={data} />
               <div>
                 <h3 style={{ color: "red" }} className="text-center">Your Idea is not accepted, Better luck next time</h3>
-              </div></>)}
+              </div>
+              {event?.endDate >= currDate && (
+                <div>
+                  {Object.keys(fetchedData).length > 0 && (
+                    <>
+                      {/* ////////////////////////// */}
+                      <div className="ideaCard">
+                        <MDBRow>
+                          <MDBCol md="4">
+                            <h4 className="fw-bold">Reviews from the Panelist</h4>
+                          </MDBCol>
+                          <MDBCol md="12">
+                            <h6 className="">{fetchedData?.team?.newComment}</h6>
+                          </MDBCol>
+                        </MDBRow>
+                      </div>
 
-          </MDBContainer>
-        </>
-      )
+                      {/* //////////////////////////// */}
+                    </>
+                  )}
+
+                  {/* edit details */}
+                </div>
+              )}
+              {event?.endDate < currDate && (<h2 style={{ color: "red" }} className="text-center">Event ended</h2>)}
+            </>)}
+
+          </MDBContainer></>
+
+      );
 
     case "reverted":
       return (

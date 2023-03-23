@@ -34,9 +34,20 @@ export default function PanelistModal({ item, refetch }) {
   const [commentText, setCommentText] = useState('');
 
 
+  const [rejectComment, setShowRejectComment] = useState(false);
   const handleButtonClick = () => {
+    setShowRejectComment(false);
     setShowCommentBox(true);
   };
+
+
+
+  const handleRejectButton = () => {
+    setShowCommentBox(false);
+    setShowRejectComment(true);
+   
+  };
+
 
   const handleCommentChange = (event) => {
     setCommentText(event.target.value);
@@ -79,6 +90,31 @@ export default function PanelistModal({ item, refetch }) {
     }
   };
 
+  const handleCommentSubmit2 = () => {
+    
+      teamObj.newComment = commentText;
+      teamObj.status = "rejected";
+      teamObj.panelistId = data.id;
+      // console.log(teamObj);
+
+      setBasicModal(!basicModal);
+
+      axios.post("/statusChange", teamObj)
+        .then((response) => {
+          Swal.fire(`Idea ${teamObj.status}`);
+          refetch()
+        }, (error) => {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'An error has occured',
+          });
+        });
+      setCommentText('');
+      setShowCommentBox(false);
+    
+  };
 
   // const handleCommentSubmit = async () => {
   //   if (!commentText) {
@@ -171,9 +207,10 @@ export default function PanelistModal({ item, refetch }) {
               <MDBBtn color="success" value={"accepted"} onClick={(e) => handleSubmit(e)}>
                 Accept
               </MDBBtn>
-              <MDBBtn color="danger" value={"rejected"} onClick={(e) => handleSubmit(e)}>
+              <MDBBtn color="danger" value={"rejected"} onClick={(e) => handleRejectButton(e)}>
                 Reject
               </MDBBtn>
+              
               <MDBBtn color="warning" value={"reverted"} onClick={(e) => handleButtonClick(e)}>
                 Revert
               </MDBBtn>
@@ -181,6 +218,12 @@ export default function PanelistModal({ item, refetch }) {
                 <div>
                   <textarea value={commentText} onChange={handleCommentChange} placeholder={"Write Suggestions"} rows="5" cols="40" style={{ border: "1px solid black", margin: "5px", marginTop: "10px" }} />
                   <MDBBtn color="info" onClick={handleCommentSubmit} style={{ marginBottom: "12px" }}>Submit</MDBBtn>
+                </div>
+              )}
+              {rejectComment && (
+                <div>
+                  <textarea value={commentText} onChange={handleCommentChange} placeholder={"Write Suggestions (Optional)"} rows="5" cols="40" style={{ border: "1px solid black", margin: "5px", marginTop: "10px" }} />
+                  <MDBBtn color="info" onClick={handleCommentSubmit2} style={{ marginBottom: "12px" }}>Submit</MDBBtn>
                 </div>
               )}
             </MDBModalFooter>

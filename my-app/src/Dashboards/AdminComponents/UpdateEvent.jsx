@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import { MDBCardBody, MDBInput, MDBTable, MDBTextArea, MDBBtn, MDBRow, MDBCard, MDBCol } from 'mdb-react-ui-kit';
 import Navbar2 from '../../Components/Navbar2';
 import Swal from 'sweetalert2';
+import { useNavigate, NavLink } from 'react-router-dom';
+
 
 function UpdateEvent() {
   const [event, setEvent] = useState({});
@@ -91,92 +93,104 @@ function UpdateEvent() {
   return (
     <>
       <Navbar2 />
-      <MDBRow className='justify-content-center align-items-center m-5'>
-        <MDBCard>
-          <MDBCardBody className='px-8'>
-            <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2 ">Current Event</h4>
-            <MDBTable bordered borderColor="primary" className="text-break">
-              <thead>
-                <tr >
-                  <th style={{width:"6%"}}>Id</th>
-                  <th style={{width:"25%"}}>Name</th>
-                  <th  style={{width:"12%"}}>Start Date</th>
-                  <th style={{width:"12%"}}>End Date</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* {EventRow} */}
-                <tr>
-                  <td>{event?.eventId}</td>
-                  <td>{event?.eventName}</td>
-                  <td>{event?.startDate}</td>
-                  <td>{event?.endDate}</td>
-                  <td>{event?.description}</td>
-                </tr>
-              </tbody>
-            </MDBTable>
-            {!editBtn && (
-              <div className="col-12" style={{ textAlign: "right" }}>
-                <MDBBtn onClick={handleEditBtn}>Edit</MDBBtn>
-              </div>
-            )}
+      <div>
+        
+          
+            <NavLink to="/AdminDashboard">
+              
+                <img src="https://icon-library.com/images/back-button-icon/back-button-icon-8.jpg" height="31px" width="51px" style={{ paddingLeft: "20px" }}>
+                </img>
+              
+              </NavLink>
+          
+        
+        <MDBRow className='justify-content-center align-items-center m-5' >
+          <MDBCard >
+            <MDBCardBody className='px-8'>
+              <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2 ">Current Event</h4>
+              <MDBTable bordered borderColor="primary" className="text-break">
+                <thead>
+                  <tr >
+                    <th style={{ width: "6%" }}>Id</th>
+                    <th style={{ width: "25%" }}>Name</th>
+                    <th style={{ width: "12%" }}>Start Date</th>
+                    <th style={{ width: "12%" }}>End Date</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* {EventRow} */}
+                  <tr>
+                    <td>{event?.eventId}</td>
+                    <td>{event?.eventName}</td>
+                    <td>{event?.startDate}</td>
+                    <td>{event?.endDate}</td>
+                    <td>{event?.description}</td>
+                  </tr>
+                </tbody>
+              </MDBTable>
+              {!editBtn && (
+                <div className="col-12" style={{ textAlign: "right" }}>
+                  <MDBBtn onClick={handleEditBtn}>Edit</MDBBtn>
+                </div>
+              )}
 
-            {editBtn && (
+              {editBtn && (
 
-              <MDBRow className='justify-content-center align-items-center m-5'>
-                <MDBCard>
-                  <MDBCardBody className='px-8'>
+                <MDBRow className='justify-content-center align-items-center m-5'>
+                  <MDBCard>
+                    <MDBCardBody className='px-8'>
 
-                    <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Update Event</h4>
+                      <h4 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-2">Update Event</h4>
 
-                    <MDBRow className='align-items-center pt-0 '>
-                      <MDBCol md='4' >
-                        <MDBInput id="eventName" value={usdatedEvent.eventName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Event Name' size='md' type='text' />
-                        {/* <p style={myStyle}>{errors.eventName}</p> */}
-                      </MDBCol>
-
-
-                      <MDBCol md='4' >
-                        <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
-                          <Form.Control placeholder="Start date" label="Start Date" type="date" id="startDate" value={usdatedEvent.startDate} onChange={(e) => handleInput(e)} />
-                          {/* <p style={myStyle}>{errors.startDate}</p> */}
-                        </div>
-
-                      </MDBCol>
-
-                      <MDBCol md='4' >
-                        <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
-                          <Form.Control placeholder="End date" type="date" id="endDate" value={usdatedEvent.endDate} onChange={(e) => handleInput(e)} />
-                          {/* <p style={myStyle}>{errors.endDate}</p> */}
-                        </div>
-
-                      </MDBCol>
-
-                      <MDBRow className='align-items-center pt-2 pb-3'>
-
-                        <MDBCol md='3' className='ps-5'>
-                          <h6 className="mb-0">Event Description</h6>
+                      <MDBRow className='align-items-center pt-0 '>
+                        <MDBCol md='4' >
+                          <MDBInput id="eventName" value={usdatedEvent.eventName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Event Name' size='md' type='text' />
+                          {/* <p style={myStyle}>{errors.eventName}</p> */}
                         </MDBCol>
 
-                        <MDBCol md='9' className='pe-5'>
-                          <MDBTextArea id="description" value={usdatedEvent.description} onChange={(e) => handleInput(e)} label='' rows={3} style={{ resize: "none" }} required className='col-md-4' />
-                          {/* <p style={myStyle}>{errors.description}</p> */}
-                        </MDBCol >
+
+                        <MDBCol md='4' >
+                          <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
+                            <Form.Control placeholder="Start date" label="Start Date" type="date" id="startDate" value={usdatedEvent.startDate} onChange={(e) => handleInput(e)} />
+                            {/* <p style={myStyle}>{errors.startDate}</p> */}
+                          </div>
+
+                        </MDBCol>
+
+                        <MDBCol md='4' >
+                          <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
+                            <Form.Control placeholder="End date" type="date" id="endDate" value={usdatedEvent.endDate} onChange={(e) => handleInput(e)} />
+                            {/* <p style={myStyle}>{errors.endDate}</p> */}
+                          </div>
+
+                        </MDBCol>
+
+                        <MDBRow className='align-items-center pt-2 pb-3'>
+
+                          <MDBCol md='3' className='ps-5'>
+                            <h6 className="mb-0">Event Description</h6>
+                          </MDBCol>
+
+                          <MDBCol md='9' className='pe-5'>
+                            <MDBTextArea id="description" value={usdatedEvent.description} onChange={(e) => handleInput(e)} label='' rows={3} style={{ resize: "none" }} required className='col-md-4' />
+                            {/* <p style={myStyle}>{errors.description}</p> */}
+                          </MDBCol >
+                        </MDBRow>
                       </MDBRow>
-                    </MDBRow>
-                    <div className='col-12 '>
-                      <MDBBtn onClick={handleSubmit} >Update</MDBBtn>
-                    </div>
+                      <div className='col-12 '>
+                        <MDBBtn onClick={handleSubmit} >Update</MDBBtn>
+                      </div>
 
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBRow>
-            )}
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBRow>
+              )}
 
-          </MDBCardBody>
-        </MDBCard>
-      </MDBRow>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBRow>
+      </div>
     </>
   )
 }

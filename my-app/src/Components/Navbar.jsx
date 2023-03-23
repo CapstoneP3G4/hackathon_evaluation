@@ -1,6 +1,8 @@
 import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { MDBBtn, MDBCol, MDBRow } from 'mdb-react-ui-kit';
+
 import axios from "axios";
 import { useNavigate, NavLink } from 'react-router-dom';
 import './Navbar.css';
@@ -68,20 +70,6 @@ const Navbar = () => {
       });
   }, []);
 
-  const [event, setEvent] = useState({});
-  useEffect(() => {
-    axios.get("/getEvent").then(
-      (response) => {
-        setEvent(response.data[0]);
-        // console.log(response.data[0]);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-  }, []);
-
   return (
     // <div style={{marginBottom:"5px",paddingLeft:"50px", backgroundColor:"#d4e4ff"}} className="flex justify-between items-center h-24  mx-auto px-12 text-black-300">
     // <div><Link to="/">
@@ -97,9 +85,21 @@ const Navbar = () => {
     <nav className="navbar" style={{zIndex: '1'}}>
       <div className="container1">
         <div className="logo">
-          <div ><Link to="https://www.incedoinc.com/company-overview/">
-            <img src="https://www.incedoinc.com/wp-content/uploads/incedo-logo.png" width="101px" />
-          </Link></div>
+
+          <MDBRow>
+          <MDBCol>
+            <NavLink to="/">
+              <img src="https://cdn-icons-png.flaticon.com/512/5974/5974636.png" width="31px" />
+            </NavLink>
+          </MDBCol>
+
+          <MDBCol>
+        
+            <div ><Link to="https://www.incedoinc.com/company-overview/">
+              <img src="https://www.incedoinc.com/wp-content/uploads/incedo-logo.png" width="101px" />
+            </Link></div>
+          </MDBCol>
+          </MDBRow>
         </div>
         <div className="menu-icon" onClick={handleShowNavbar}>
           <img src="https://cdn0.iconfinder.com/data/icons/basic-ui-vol-1/32/UI_stroke-05-512.png" width="50px" />
@@ -109,7 +109,7 @@ const Navbar = () => {
             <li>
               <NavLink onClick={handleClickScrollEvents}>Events</NavLink>
             </li>
-            {winners[0]?.marks > 0 && event?.result=="true" && (
+            {winners[0]?.marks > 0 && (
             <li>
               <NavLink onClick={handleClickScrollTopScorers}>Top Scorers</NavLink>
             </li>

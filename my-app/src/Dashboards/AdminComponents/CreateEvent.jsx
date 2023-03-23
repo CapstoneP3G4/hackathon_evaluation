@@ -95,7 +95,7 @@ function CreateEvent() {
 
                         <MDBRow className='align-items-center pt-0 '>
                             <MDBCol md='4' >
-                                <MDBInput id="eventName" value={event.eventName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Event Name' size='md' type='text' />
+                                <MDBInput id="eventName" value={event.eventName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label = <span style={italicText}>Event Name</span> size='md' type='text' />
                                 <p style={myStyle}>{errors.eventName}</p>
                             </MDBCol>
 
@@ -104,7 +104,7 @@ function CreateEvent() {
                                 <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
                                     <Form.Control
                                         placeholder="Start date"
-                                        label="Start Date"
+                                        label=<span style={italicText}>Start Date</span>
                                         type="date"
                                         id="startDate"
                                         value={event.startDate}
@@ -136,7 +136,7 @@ function CreateEvent() {
                                 </MDBCol>
 
                                 <MDBCol md='9' className='pe-5'>
-                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label='Max. 5000 characters limit' rows={3} style={{ resize: "none" }} required className='col-md-4' />
+                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label=<span style={italicText}>Max. 5000 characters limit</span> rows={3} style={italicText} required className='col-md-4' />
                                     <p style={myStyle}>{errors.description}</p>
                                 </MDBCol>
 
