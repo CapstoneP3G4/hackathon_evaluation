@@ -24,7 +24,6 @@ export default function PanelistModal({ item, refetch }) {
   const [data, setData] = useState(JSON.parse(localStorage.getItem("data")));
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem("data")));
-    // console.log(data);
   }, [localStorage.getItem("data")])
 
 
@@ -69,7 +68,6 @@ export default function PanelistModal({ item, refetch }) {
       teamObj.newComment = commentText;
       teamObj.status = "reverted";
       teamObj.panelistId = data.id;
-      // console.log(teamObj);
 
       setBasicModal(!basicModal);
 
@@ -116,39 +114,6 @@ export default function PanelistModal({ item, refetch }) {
     
   };
 
-  // const handleCommentSubmit = async () => {
-  //   if (!commentText) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Oops...',
-  //       text: 'Comment cannot be empty',
-  //     });
-  //   }
-  //   else {
-  //     teamObj.newComment = commentText;
-  //     teamObj.status = "reverted";
-  //     teamObj.panelistId = data.id;
-  //     // console.log(teamObj);
-
-  //     setBasicModal(!basicModal);
-  //     try {
-  //       axios.post("/statusChange", teamObj)
-  //       await Swal.fire(`Participant ${teamObj.status}`);
-  //       await refetch()
-  //     } catch (err) {
-  //       console.log(err);
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Oops...',
-  //         text: 'An error has occured',
-  //       });
-  //     }
-  //     setCommentText('');
-  //     setShowCommentBox(false);
-     
-  //   }
-  // };
-
 
   //////////////////////////////////////////////////////////////
 
@@ -192,8 +157,6 @@ export default function PanelistModal({ item, refetch }) {
               ></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-              {/* <Timer />
-              <Clock /> */}
               <div className="">
                 <h4>Problem Statement</h4>
                 <p>{statement}</p>

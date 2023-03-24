@@ -63,25 +63,12 @@ const Navbar = () => {
     axios.get('/winners')
       .then(response => {
         setWinners(response.data);
-        // console.log(response.data[0]);
-
       }, (error) => {
         console.log(error);
       });
   }, []);
 
   return (
-    // <div style={{marginBottom:"5px",paddingLeft:"50px", backgroundColor:"#d4e4ff"}} className="flex justify-between items-center h-24  mx-auto px-12 text-black-300">
-    // <div><Link to="/">
-    //     <img src="https://www.incedoinc.com/wp-content/uploads/incedo-logo.png" width="101px"/>
-    //         </Link></div>
-    //   <div><Link to="/ChangePassword"><Button variant="outlined" color='error'>Update Password</Button></Link>
-    //   &nbsp;&nbsp;&nbsp;
-    //   <Button onClick={handleclick} variant="contained" color='error'>{window.status}</Button>
-    //   </div>
-    // </div>
-
-
     <nav className="navbar" style={{zIndex: '1'}}>
       <div className="container1">
         <div className="logo">

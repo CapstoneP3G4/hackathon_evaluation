@@ -20,7 +20,6 @@ function FileUpload({ userObj }) {
   function handleFileInput(e) {
     setSelectedFile(e.target.files[0]);
   }
-  // console.log(userObj);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,20 +39,16 @@ function FileUpload({ userObj }) {
       setIsLoading(true);
       axios.post('/upload', formData)
         .then((response) => {
-          // console.log(selectedFile);
           setIsLoading(false);
           setSubmit(true);
           Swal.fire('Great', 'Video uploaded successfully!', 'success')
         }, (error) => {
-          // console.log(error);
           setIsLoading(false);
           Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please upload the video!', })
         });
     }
     return false;
   }
-
-  // !userObj?.demo
 
   return (
     <>

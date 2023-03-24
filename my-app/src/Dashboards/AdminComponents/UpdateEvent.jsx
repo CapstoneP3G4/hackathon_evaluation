@@ -21,21 +21,18 @@ function UpdateEvent() {
       (response) => {
         setEvent(response.data[0]);
         setUpdatedEvent(response.data[0]);
-        // console.log(response.data[0]);
       },
       (error) => {
         console.log(error);
       }
     );
-
   }, [editBtn]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitted) {
-      setEditBtn(true);
+      // setEditBtn(true);
       axios.post('/updateEvent', usdatedEvent)
         .then((response) => {
-          // console.log(event);
           Swal.fire('Great', 'Event updated successfully!', 'success'
           )
           setEditBtn(false);
@@ -60,7 +57,7 @@ function UpdateEvent() {
     e.preventDefault();
     serErrors(validate(usdatedEvent));
     setSubmited(true);
-    setEditBtn(false);
+    // setEditBtn(false);
   }
 
   const handleInput = (e) => {
@@ -68,42 +65,41 @@ function UpdateEvent() {
     setUpdatedEvent({ ...usdatedEvent, [id]: value });
   }
 
-  const validate = (updateEvent) => {
+  const validate = (usdatedEvent) => {
     const errorsObj = {};
 
-    if (!updateEvent.eventName) {
+    if (!usdatedEvent.eventName) {
       errorsObj.eventName = 'EventName is required';
     }
-    if (!updateEvent.description) {
-      errorsObj.description = 'Description is required';
-    }
-    if (!updateEvent.startDate || !updateEvent.endDate) {
-      errorsObj.endDate = 'Please select a date';
+    else if (!usdatedEvent.startDate) {
       errorsObj.startDate = 'Please select a date';
     }
-    if (updateEvent.startDate > updateEvent.endDate) {
+    else if(!usdatedEvent.endDate){
+      errorsObj.endDate = 'Please select a date';
+    }
+    else if (usdatedEvent.startDate > usdatedEvent.endDate) {
       errorsObj.endDate = 'Enter valid date';
       errorsObj.startDate = 'Enter valid date';
+    }
+    else if (!usdatedEvent.description) {
+      errorsObj.description = 'Description is required';
     }
     return errorsObj;
   }
 
+  const myStyle = {
+    color: 'red',
+}
 
 
   return (
     <>
       <Navbar2 />
-      <div>
-        
-          
+      <div> 
             <NavLink to="/AdminDashboard">
-              
                 <img src="https://icon-library.com/images/back-button-icon/back-button-icon-8.jpg" height="31px" width="51px" style={{ paddingLeft: "20px" }}>
                 </img>
-              
               </NavLink>
-          
-        
         <MDBRow className='justify-content-center align-items-center m-5' >
           <MDBCard >
             <MDBCardBody className='px-8'>
@@ -146,14 +142,14 @@ function UpdateEvent() {
                       <MDBRow className='align-items-center pt-0 '>
                         <MDBCol md='4' >
                           <MDBInput id="eventName" value={usdatedEvent.eventName} onChange={(e) => handleInput(e)} wrapperClass='mb-2' required className='col-md-4' label='Event Name' size='md' type='text' />
-                          {/* <p style={myStyle}>{errors.eventName}</p> */}
+                          <p style={myStyle}>{errors.eventName}</p>
                         </MDBCol>
 
 
                         <MDBCol md='4' >
                           <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
                             <Form.Control placeholder="Start date" label="Start Date" type="date" id="startDate" value={usdatedEvent.startDate} onChange={(e) => handleInput(e)} />
-                            {/* <p style={myStyle}>{errors.startDate}</p> */}
+                            <p style={myStyle}>{errors.startDate}</p>
                           </div>
 
                         </MDBCol>
@@ -161,7 +157,7 @@ function UpdateEvent() {
                         <MDBCol md='4' >
                           <div className="" style={{ bordeRadius: "50px", marginBottom: "15px" }}>
                             <Form.Control placeholder="End date" type="date" id="endDate" value={usdatedEvent.endDate} onChange={(e) => handleInput(e)} />
-                            {/* <p style={myStyle}>{errors.endDate}</p> */}
+                            <p style={myStyle}>{errors.endDate}</p>
                           </div>
 
                         </MDBCol>
@@ -174,7 +170,7 @@ function UpdateEvent() {
 
                           <MDBCol md='9' className='pe-5'>
                             <MDBTextArea id="description" value={usdatedEvent.description} onChange={(e) => handleInput(e)} label='' rows={3} style={{ resize: "none" }} required className='col-md-4' />
-                            {/* <p style={myStyle}>{errors.description}</p> */}
+                            <p style={myStyle}>{errors.description}</p>
                           </MDBCol >
                         </MDBRow>
                       </MDBRow>

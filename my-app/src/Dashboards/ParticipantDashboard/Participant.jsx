@@ -31,7 +31,6 @@ function Participant() {
     Object.keys(data).length > 0 &&
       axios.get(`/particpantsDetails/${data?.email}`).then(
         (response) => {
-          // console.log(response.data);
           setFetchedData(response?.data)
         },
         (error) => {
@@ -174,18 +173,11 @@ function Participant() {
                       &nbsp;
                       {!fetchedData?.team?.idea?.demo && (
                         <MDBCol>
-                          {/* <FileUpload userObj={fetchedData?.team?.idea} /> */}
                           {submit == false && (
                             <>
                               <MDBFile label="Upload the presentation video in '.mp4' format only" onChange={handleFileInput} />
                               <br />
-                              {/* <MDBBtn onClick={handleSubmit} >Upload</MDBBtn> */}
                               &nbsp;&nbsp;&nbsp;
-                              {/* {isLoading && (
-                                <MDBSpinner color='dark' style={{ marginTop: "5px" }} className="justify-content-center">
-                                  <span className='visually-hidden'>Loading...</span>
-                                </MDBSpinner>
-                              )} */}
                             </>
 
                           )}

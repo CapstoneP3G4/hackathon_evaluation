@@ -17,7 +17,6 @@ const Card1 = ({ teamObj }) => {
 
   return (
     <MDBCard alignment='center' style={{ marginBottom: "20px" }}>
-      {/* {console.log(teamObj)}; */}
 
       <MDBCardHeader>Team Id: {team?.teamId}</MDBCardHeader>
       <MDBCardHeader>Team Name: {team?.teamName}</MDBCardHeader>
@@ -25,9 +24,7 @@ const Card1 = ({ teamObj }) => {
       <MDBCardBody>
         <MDBCardTitle>Problem Statement: {team?.idea?.problemStatement}</MDBCardTitle>
         <MDBCardText>Problem Description: {team?.idea?.description}</MDBCardText>
-        {/* <MDBBtn href='#'>Go somewhere</MDBBtn> */}
       </MDBCardBody>
-      {/* <MDBCardFooter> */}
       {team?.status == "reverted" && (
         <MDBBtn href='#' color='warning' disabled>Idea Status: {team?.status}</MDBBtn>
       )}
@@ -67,12 +64,9 @@ function TeamDetails({ userObj }) {
   const [Submit, setSubmit] = useState(false);
 
   useState(() => {
-    // console.log("Form submitted");
     setSubmit(false);
   }, [Submit]);
 
-
-  // console.log(teamData.team);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!update?.updatedStatement || !update?.updatedDescription) {
@@ -87,7 +81,6 @@ function TeamDetails({ userObj }) {
 
       axios.post("/updatedIdea", teamData.team).then(
         (response) => {
-          // console.log(response);
           setSubmit(true);
           Swal.fire("Great", "Idea sent succesfully!", "success");
         },
@@ -107,7 +100,6 @@ function TeamDetails({ userObj }) {
   useEffect(() => {
     axios.get(`/particpantsDetails/${userObj?.email}`).then(
       (response) => {
-        // console.log( response.data);
         setTeamData(response.data);
         setFlag(true)
       },
@@ -124,12 +116,12 @@ function TeamDetails({ userObj }) {
       <div className="cards">
         <MDBRow>
           <MDBCol><Timers /></MDBCol>
-        <MDBCol>
-        <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">
-          Participant Details
-        </h3>
-        </MDBCol>
-        <MDBCol></MDBCol>
+          <MDBCol>
+            <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">
+              Participant Details
+            </h3>
+          </MDBCol>
+          <MDBCol></MDBCol>
         </MDBRow>
 
         {flag && (
@@ -138,9 +130,6 @@ function TeamDetails({ userObj }) {
               <MDBCol lg="6" class="d-flex justify-content-center align-items-center" >
                 <Card1 teamObj={teamData} />
               </MDBCol>
-              {/* <MDBCol lg="12">
-              <Card2 teamObj={teamData} />
-            </MDBCol> */}
             </MDBRow>
           </>
         )}

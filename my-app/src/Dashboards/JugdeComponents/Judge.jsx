@@ -30,14 +30,6 @@ const Card = ({ teamObj, refetch }) => {
         </MDBCol>
       </MDBRow>
       <MDBRow>
-        {/* <MDBCol md="12">
-          <h6 className="fw-bold">Problem Statement</h6>
-        </MDBCol>
-      </MDBRow>
-      <MDBRow>
-        <MDBCol md="12">
-          <p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p>
-        </MDBCol> */}
       </MDBRow>
       <JudgeModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj }} refetch={refetch} />
     </div>

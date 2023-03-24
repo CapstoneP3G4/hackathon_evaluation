@@ -103,7 +103,6 @@ export default function JudgeModal({ item, refetch }) {
                 <a style={{ color: "red" }} href={teamObj.gitHubLink} target="_blank">Github link</a>
               </div>
             </MDBModalBody>
-            {/* <a href={teamObj.idea.demo} download>Download the video</a> */}
 
             {/* ///////////////////////////////////////////      video           ////////////////////////////////////////////////////////// */}
             <MDBRow>

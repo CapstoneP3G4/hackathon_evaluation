@@ -69,8 +69,6 @@ function ShowUsers() {
                             <MDBBtn className='me-1' color='danger' >Delete</MDBBtn>
                         </Popconfirm>
                     </td>
-
-                    {/* <td><MDBBtn onClick={(e) => handleDelete(info.id)} className='me-1' color='danger' >Delete</MDBBtn></td> */}
                 </tr>
             );
         }
@@ -147,11 +145,6 @@ function ShowUsers() {
                 </img>
               
               </NavLink>
-          
-          {/* <MDBCol>
-          <h3 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-4 text-center ">User List</h3>
-          </MDBCol>
-          <MDBCol></MDBCol> */}
         
             <MDBRow className='justify-content-center align-items-center m-5'>
                 <MDBCard>

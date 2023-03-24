@@ -10,6 +10,7 @@ function LoginPage() {
   const [isSubmit, setSubmit] = useState(false);
   const navigate = useNavigate();
 
+  /////////////////state for  entered details////////////////
   const [teamForm, setTeamForm] = useState({
     email: "",
     password: "",
@@ -26,6 +27,8 @@ function LoginPage() {
   const styles = {
     backgroundImage: "url('./images/login-bg.png')",
   };
+
+  //////////////////handle login click///////////////////////
   const handleclick = (e) => {
     e.preventDefault();
     setSubmit(true);
@@ -61,6 +64,7 @@ function LoginPage() {
     }
   };
 
+  //////////////get event api for enddates /////////////
   const currDate = moment().format("YYYY-MM-DD");
   const [event, setEvent] = useState({});
 
@@ -68,8 +72,6 @@ function LoginPage() {
     axios.get('/getEvent')
       .then(response => {
         setEvent(response.data[0]);
-        // console.log(response.data[0]);
-
       }, (error) => {
         console.log(error);
       });

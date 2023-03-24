@@ -21,7 +21,7 @@ function ChangePassword() {
     color: 'red'
   }
 
-
+//////////////////////// State for managing password ////////////////////////
   const [teamForm, setTeamForm] = useState({
     email: '',
     oldPassword: '',

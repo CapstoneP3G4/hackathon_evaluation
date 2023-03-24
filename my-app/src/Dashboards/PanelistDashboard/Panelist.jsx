@@ -10,7 +10,6 @@ import FetchTeamData from "../../hooks/fetch-team-data";
 import Timers from "../../Components/Timers";
 
 const Card = ({ teamObj, refetch, isLoading }) => {
-  // console.log(teamObj);
 
   const { teamId, teamName, idea } = teamObj;
   return (
@@ -35,13 +34,6 @@ const Card = ({ teamObj, refetch, isLoading }) => {
                   <h4 className="fw-bold">{teamName}</h4>
                 </MDBRow>
               </MDBCol>
-
-              {/* <MDBRow>
-              <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
-            </MDBRow> */}
             </MDBRow>
             <MDBRow>
               <PanelistModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj, }} refetch={refetch} />
@@ -69,14 +61,6 @@ const Card = ({ teamObj, refetch, isLoading }) => {
                   <h4 className="fw-bold">{teamName}</h4>
                 </MDBRow>
               </MDBCol>
-
-              
-              {/* <MDBRow>
-              <MDBCol md="12"><h6 className="fw-bold">Problem Statement</h6></MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="12"><p className="fw-medium">{idea?.problemStatement.substring(0, 50)}...</p></MDBCol>
-            </MDBRow> */}
             </MDBRow>
             <MDBRow>
               <PanelistModal
