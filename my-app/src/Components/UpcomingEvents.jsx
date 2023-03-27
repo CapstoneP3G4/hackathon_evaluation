@@ -44,34 +44,15 @@ export default function App() {
 
   ///////////////////////display according to screen size////////////////////////////
   useEffect(() => {
-    if (window.innerWidth < 600) {
-      setSettings((prevSettings) => ({
-        ...prevSettings,
-        slidesToShow: 1,
-      }));
-    }
-    else if (window.innerWidth < 768) {
-      setSettings((prevSettings) => ({
-        ...prevSettings,
-        slidesToShow: (event?.length < 2) ? event?.length : 2,
-      }));
-    } else {
-      setSettings((prevSettings) => ({
-        ...prevSettings,
-        slidesToShow: (event?.length < 3) ? event?.length : 3,
-      }));
-    }
-      axios.get("/getEvent").then(
-        (response) => {
-          setEvent(response.data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    }, [event]);
-
+    axios.get("/getEvent").then(
+      (response) => {
+        setEvent(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [])
   const [settings, setSettings] = useState({
     centerMode: true,
     draggable: true,
@@ -79,23 +60,54 @@ export default function App() {
     pauseOnHover: true,
     infinite: true,
     swipeToSlide: true,
-    slidesToShow: (event?.length >= 3) ? 3 : event?.length,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1000,
     autoplaySpeed: 2000,
     focusOnSelect: true,
   });
-  
+
+  // (event?.length >= 3) ? 3 : event?.length
+
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 600) {
+        setSettings((prevSettings) => ({
+          ...prevSettings,
+          slidesToShow: 1,
+        }));
+      }
+      else if (window.innerWidth < 768) {
+        setSettings((prevSettings) => ({
+          ...prevSettings,
+          slidesToShow: (event?.length < 2) ? event?.length : 2,
+        }));
+      } else {
+        setSettings((prevSettings) => ({
+          ...prevSettings,
+          slidesToShow: (event?.length < 3) ? event?.length : 3,
+        }));
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    return()=>{
+      window.removeEventListener('resize', handleResize);
+    }
+    // console.log("event")
+  },[settings]);
+
+
 
   return (
     <>
       {event?.length > 0 && (
-        <div id="eventList" className="bg-color" style={{ marginTop: '70px'}} >
+        <div id="eventList" className="bg-color" style={{ marginTop: '70px' }} >
           <h2 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-5 text-center" >Hack-a-thon Events</h2>
           <Slider {...settings} ref={slider}>
             {event.map((card, i) => (
-              <Card {...card} />
+              <Card key={i} {...card} />
             ))}
           </Slider>
         </div>

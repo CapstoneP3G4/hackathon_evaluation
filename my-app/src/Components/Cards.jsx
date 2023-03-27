@@ -14,7 +14,6 @@ const Cards = () => {
     axios.get('/winners')
       .then(response => {
         setWinners(response.data);
-        console.log(response.data);
       }, (error) => {
         console.log(error);
       });

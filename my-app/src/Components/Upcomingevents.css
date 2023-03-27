@@ -9,6 +9,8 @@
 }
 
 .team-iem {
+	width: 100%;
+	overflow: hidden;
 	background: #ffffff;
 	text-align: center;
 	margin: 20px 0;
