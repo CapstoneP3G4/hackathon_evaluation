@@ -87,7 +87,7 @@ function Judge() {
 
   const evaluationDate = moment(date).format("YYYY-MM-DD");
 
-  // console.log(evaluationDate);
+  console.log(evaluationDate);
   // console.log(currDate < evaluationDate);
   // //////////////////////////////////////
 

@@ -55,7 +55,7 @@ function Admin() {
   const [allDone,setAllDone] = useState(false);
   axios.get("/allJudges").then(
     (response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setAllDone(response.data);
     },
     (error) => {
@@ -78,7 +78,15 @@ function Admin() {
     );
 
   }, []);
+
   const currDate = moment().format("YYYY-MM-DD");
+  let date = new Date(event?.endDate);
+  // add 2 days
+  date.setDate(date.getDate() + 2);
+  const evaluationDate = moment(date).format("YYYY-MM-DD");
+
+  console.log(evaluationDate);
+  console.log(currDate);
 
   return (
     <>
@@ -110,7 +118,7 @@ function Admin() {
         <AddDomain />
 
         {/* /////////////////////////////send mail to winners///////////////////////////////////// */}
-        {allDone &&(
+        { (currDate>evaluationDate || allDone) &&(
           <div className="col text-center">
             <MDBBtn onClick={handleMail} className="btn btn-default" style={{ width: "25%", marginBottom: "5%" }}> Declare Results</MDBBtn>
           </div>
