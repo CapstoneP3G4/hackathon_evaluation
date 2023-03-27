@@ -41,7 +41,7 @@ function Admin() {
     axios.post("/winnersMail", event).then(
       (response) => {
         setIsLoading(false);
-        Swal.fire('Great', 'Mail sent successfully!', 'success');
+        Swal.fire('Great', 'Result declared and Mail sent successfully!', 'success');
       },
       (error) => {
         setIsLoading(false);
@@ -50,8 +50,21 @@ function Admin() {
     );
   }
 
-  //////////////////////api call for get the event/////////////////////
 
+  //////////////////////api call to check if all judges judged all ideas/////////////////////
+  const [allDone,setAllDone] = useState(false);
+  axios.get("/allJudges").then(
+    (response) => {
+      console.log(response.data);
+      setAllDone(response.data);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+
+  //////////////////////api call for get the event/////////////////////
+  
   const [event, setEvent] = useState({});
   useEffect(() => {
     axios.get("/getEvent").then(
@@ -97,9 +110,9 @@ function Admin() {
         <AddDomain />
 
         {/* /////////////////////////////send mail to winners///////////////////////////////////// */}
-        {event.endDate < currDate && (
+        {allDone &&(
           <div className="col text-center">
-            <MDBBtn onClick={handleMail} className="btn btn-default" style={{ width: "25%", marginBottom: "5%" }}> Send mail to winners</MDBBtn>
+            <MDBBtn onClick={handleMail} className="btn btn-default" style={{ width: "25%", marginBottom: "5%" }}> Declare Results</MDBBtn>
           </div>
         )}
         <div style={{display:"flex", justifyContent:"center"}}>
