@@ -30,7 +30,6 @@ function UpdateEvent() {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitted) {
-      // setEditBtn(true);
       axios.post('/updateEvent', usdatedEvent)
         .then((response) => {
           Swal.fire('Great', 'Event updated successfully!', 'success'

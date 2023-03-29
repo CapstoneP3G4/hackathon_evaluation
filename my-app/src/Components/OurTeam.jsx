@@ -70,7 +70,7 @@ function OurTeam() {
       designation: "Quality Assurance Engineer",
       alinkedin: "https://www.linkedin.com/in/mahak-jain-7a4488120/",
       atwitter: "https://twitter.com/",
-      agithub: "https://github.com/",
+      agithub: "https://github.com/mahakjain003",
       description:
         "Responsible for the testing and automation of the application",
     },

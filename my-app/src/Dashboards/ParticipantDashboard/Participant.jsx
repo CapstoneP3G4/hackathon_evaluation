@@ -68,7 +68,7 @@ function Participant() {
   const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
-    // setSubmit(false);
+    
   }, [submit])
 
 
@@ -76,7 +76,6 @@ function Participant() {
   function handleFileInput(e) {
     setSelectedFile(e.target.files[0]);
   }
-  // console.log(userObj);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -86,13 +85,13 @@ function Participant() {
 
   const handleSubmit = () => {
     if (!git?.gitHubLink) {
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter GutHubLink!', });
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter GitHubLink!', });
     }
     else if (!(isValidUrl(git?.gitHubLink))) {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid Link!', });
     }
     else if (!(git?.gitHubLink.includes("https://github.com/"))) {
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid GutHub Link!', });
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please enter valid GitHub Link!', });
     } //////////////////////////
     else if (!selectedFile) {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Please choose a file!', })

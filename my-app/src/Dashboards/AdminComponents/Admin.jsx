@@ -37,7 +37,6 @@ function Admin() {
     e.preventDefault();
     setIsLoading(true);
     event.result = "true";
-    // console.log(event);
     axios.post("/winnersMail", event).then(
       (response) => {
         setIsLoading(false);
@@ -70,7 +69,6 @@ function Admin() {
     axios.get("/getEvent").then(
       (response) => {
         setEvent(response.data[0]);
-        // console.log(response.data[0]);
       },
       (error) => {
         console.log(error);
@@ -85,8 +83,6 @@ function Admin() {
   date.setDate(date.getDate() + 2);
   const evaluationDate = moment(date).format("YYYY-MM-DD");
 
-  console.log(evaluationDate);
-  console.log(currDate);
 
   return (
     <>

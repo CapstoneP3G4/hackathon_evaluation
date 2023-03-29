@@ -71,12 +71,12 @@ function AddDomain() {
       };
 
 
-    const dropdownData = domainData.map((info) => {
+    const dropdownData = domainData.map((info,index) => {
         return (
             <>
                 <MDBRow>
                     <MDBCol md='8' className="text-break"  >
-                        <MDBListGroupItem  >{info.domainName}</MDBListGroupItem>
+                        <MDBListGroupItem  key={info}>{info.domainName}</MDBListGroupItem>
                     </MDBCol>
                     <MDBCol md='4' >
                         <Popconfirm title="Delete"

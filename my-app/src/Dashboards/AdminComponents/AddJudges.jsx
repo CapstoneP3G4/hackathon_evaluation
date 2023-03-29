@@ -29,7 +29,6 @@ function AddJudges() {
             else {
                 axios.post('/user', judges)
                     .then((response) => {
-                        setIsLoading(false);
                         if (parseInt(judges.role_id) === 2) {
                             Swal.fire(
                                 'Great',
@@ -51,6 +50,7 @@ function AddJudges() {
                         Swal.fire({ icon: 'error', title: 'Oops...', text: 'User already exist!', })
                     });
             }
+            setIsLoading(false);
         }
 
         else {

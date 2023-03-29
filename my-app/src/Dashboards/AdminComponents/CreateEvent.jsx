@@ -33,6 +33,7 @@ function CreateEvent() {
                     setEvent({ ...event, eventName: '', startDate: '', endDate: '', description: '' });
                 }, (error) => {
                     console.log(error);
+                    setIsLoading(false);
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -136,7 +137,7 @@ function CreateEvent() {
                                 </MDBCol>
 
                                 <MDBCol md='9' className='pe-5'>
-                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label=<span style={italicText}>Max. 5000 characters limit</span> rows={3} style={italicText} required className='col-md-4' />
+                                    <MDBTextArea id="description" value={event.description} onChange={(e) => handleInput(e)} label=<span style={italicText}>Max. 5000 characters limit</span> rows={3} required className='col-md-4' />
                                     <p style={myStyle}>{errors.description}</p>
                                 </MDBCol>
 

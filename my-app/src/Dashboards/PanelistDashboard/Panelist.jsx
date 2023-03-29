@@ -31,7 +31,7 @@ const Card = ({ teamObj, refetch, isLoading }) => {
                   <h6 className="fw-bold">Team Name</h6>
                 </MDBRow>
                 <MDBRow>
-                  <h4 className="fw-bold">{teamName}</h4>
+                  <h4 className="fw-bold">{teamName.substring(0,8)}</h4>
                 </MDBRow>
               </MDBCol>
             </MDBRow>
@@ -58,7 +58,7 @@ const Card = ({ teamObj, refetch, isLoading }) => {
                   <h6 className="fw-bold">Team Name</h6>
                 </MDBRow>
                 <MDBRow>
-                  <h4 className="fw-bold">{teamName}</h4>
+                  <h4 className="fw-bold">{teamName.substring(0,8)}</h4>
                 </MDBRow>
               </MDBCol>
             </MDBRow>

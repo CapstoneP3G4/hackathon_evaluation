@@ -26,12 +26,12 @@ const Card = ({ teamObj, refetch }) => {
           <h4 className="fw-bold">{teamId}</h4>
         </MDBCol>
         <MDBCol md="6">
-          <h4 className="fw-bold">{teamName}</h4>
+          <h4 className="fw-bold">{teamName.substring(0,8)}</h4>
         </MDBCol>
       </MDBRow>
       <MDBRow>
       </MDBRow>
-      <JudgeModal item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj }} refetch={refetch} />
+      <JudgeModal key={teamId} item={{ teamId, teamName, statement: idea.problemStatement, description: idea.description, teamObj }} refetch={refetch} />
     </div>
   );
 };
@@ -69,8 +69,6 @@ function Judge() {
     axios.get('/getEvent')
       .then(response => {
         setEvent(response.data);
-        // console.log(response.data);
-
       }, (error) => {
         console.log(error);
       });
@@ -88,11 +86,6 @@ function Judge() {
   const evaluationDate = moment(date).format("YYYY-MM-DD");
 
   console.log(evaluationDate);
-  // console.log(currDate < evaluationDate);
-  // //////////////////////////////////////
-
-
-
   ////////////////////////////////////
 
   return (

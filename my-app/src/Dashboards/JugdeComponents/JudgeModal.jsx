@@ -34,16 +34,27 @@ export default function JudgeModal({ item, refetch }) {
 
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     teamObj.marks = parseInt(e.target.value);
     teamObj.judgeList = item.teamObj.judgeList + judgeData?.id + ",";
 
+    setTotal(0);
+    setWorkflow(0);
+    setPpt(0);
+    setUi(0);
     setBasicModal(!basicModal);
+
+
 
     axios.post("/marksChange", teamObj)
       .then((response) => {
 
         Swal.fire("Great", "Response Added Successfully!");
         refetch()
+        // setTotal(0)
+        // setUi(0)
+        // setWorkflow(0);
+        // setPpt(0);
       }, (error) => {
         console.log(error);
         Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
@@ -118,11 +129,9 @@ export default function JudgeModal({ item, refetch }) {
               &nbsp;
               <MDBCol>
                 <div style={{ padding: "10px", }}>
-                  <MDBRange defaultValue={ui} onChange={(e) => { setUi(e.target.value); }} min="0" max="10" step="1" id="customRange3" label={`User Interface - ${ui}`} />
-                  <MDBRange
-                    defaultValue={ppt} onChange={(e) => { setPpt(e.target.value); }} min="0" max="10" step="1" id="customRange3" label={`Quality of code - ${ppt}`}
-                  />
-                  <MDBRange defaultValue={workflow} onChange={(e) => { setWorkflow(e.target.value); }} min="0" max="10" step="1" id="customRange3" label={`Workflow - ${workflow}`} />
+                  <MDBRange defaultValue={0} onChange={(e) => { setUi(e.target.value); }} min="0" max="10" step="1" id="customRange1" label={`User Interface - ${ui}`} />
+                  <MDBRange defaultValue={0} onChange={(e) => { setPpt(e.target.value); }} min="0" max="10" step="1" id="customRange2" label={`Quality of code - ${ppt}`}/>
+                  <MDBRange defaultValue={0} onChange={(e) => { setWorkflow(e.target.value); }} min="0" max="10" step="1" id="customRange3" label={`Workflow - ${workflow}`} />
                   Total - {total}
                 </div>
                 <MDBModalFooter>
