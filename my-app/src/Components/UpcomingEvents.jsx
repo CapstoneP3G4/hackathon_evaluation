@@ -120,6 +120,7 @@ export default function App() {
     speed: 1000,
     autoplaySpeed: 2000,
     focusOnSelect: true,
+    dots: true,
   });
 
   // (event?.length >= 3) ? 3 : event?.length
@@ -159,7 +160,7 @@ export default function App() {
       {event?.length > 0 && (
         <div id="eventList" className="bg-color" style={{ marginTop: '70px' }} >
           <h2 className="fw-bold mb-2 pb-2 pb-md-0 mb-md-5 text-center" >Hack-a-thon Events</h2>
-          <Slider {...settings} ref={slider}>
+          <Slider {...settings} ref={slider} style={{width: '97%'}}>
             
             {newEventData && newEventData.map((card, i) => (
               <Card key={i} {...card} />
